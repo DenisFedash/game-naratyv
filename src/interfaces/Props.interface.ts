@@ -12,6 +12,7 @@ export interface TextFCComponentsProps {
 
 export interface ColorProps{
   onColorSelect: (color: string) => void;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   
 }
 

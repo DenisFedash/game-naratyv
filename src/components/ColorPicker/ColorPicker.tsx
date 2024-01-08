@@ -11,21 +11,11 @@ const colorList = [
   "#FEFEFE",
 ];
 
-// const colorGrid = colorList.map((color) => {
-//   return (
-//     <div
-//       onClick={() => handleColorClick(color)}
-//       key={color}
-//       className="w-6 h-6 rounded-full cursor-pointer"
-//       style={{ backgroundColor: `${color}` }}
-//     ></div>
-//   );
-// });
 interface ColorPickerProps {
   onColorSelect: (color: string) => void;
 }
 
-export const ColorPicker: FC<ColorProps> = ({ onColorSelect }) => {
+export const ColorPicker: FC<ColorProps> = ({ onColorSelect, setIsOpen }) => {
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
   console.log("Color", selectedColor);
 
@@ -37,7 +27,10 @@ export const ColorPicker: FC<ColorProps> = ({ onColorSelect }) => {
   const colorGrid = colorList.map((color) => {
     return (
       <div
-        onClick={() => handleColorClick(color)}
+        onClick={() => {
+          handleColorClick(color);
+          setIsOpen(false);
+        }}
         key={color}
         className="w-6 h-6 rounded-full cursor-pointer"
         style={{ backgroundColor: `${color}` }}
@@ -48,7 +41,7 @@ export const ColorPicker: FC<ColorProps> = ({ onColorSelect }) => {
     <div>
       <div
         id="color-grid"
-        className="w-[124px] bg-main-grey grid grid-cols-3 gap-2.5 px-4 py-5 rounded-lg"
+        className="w-[124px] bg-main-grey grid grid-cols-3 gap-2.5 px-4 py-5 rounded-lg z-10"
       >
         {colorGrid}
       </div>

@@ -13,7 +13,6 @@ const Field = () => {
   return (
     <div>
       <FieldGame />
-      {/* <ColorPicker onColorSelect={handleColorSelect} /> */}
       {/* <FigurePicker selectedColor={selectedColor} /> */}
     </div>
   );
