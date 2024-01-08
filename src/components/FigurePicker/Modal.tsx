@@ -1,5 +1,5 @@
 // components/ShapesModal.tsx
-import React from "react";
+import React, { useEffect } from "react";
 import Modal from "react-modal";
 
 interface ShapesModalProps {
@@ -16,6 +16,7 @@ const ShapesModal: React.FC<ShapesModalProps> = ({
   return (
     <Modal
       isOpen={isOpen}
+      ariaHideApp={false}
       onRequestClose={onClose}
       contentLabel="Choose a Shape"
     >
