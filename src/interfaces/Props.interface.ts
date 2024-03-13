@@ -8,6 +8,9 @@ export interface TextFCComponentsProps {
   textTr: {
     [key: string]: any;
   };
+  lang?: string;
+  role?: string;
+  id?: string;
 }
 
 export interface LangFCComponentsProps {
@@ -31,12 +34,15 @@ export interface StatisticProps {
 }
 
 export interface BtnProps {
-  text: string;
-}
-
-export interface MainBtnProps {
-  text: string;
-  gameData?: {isActive: boolean}
+  text?: string;
+  lang?: string;
+  className?: string;
+  btnWidth?: string;
+  onClick?: () => void; 
+  children?: any; 
+  textTr?: {
+    [key: string]: any;
+  };
 }
 
 export interface NavBarFCComponentsProps {
@@ -111,14 +117,18 @@ export interface IconLikeProps {
 }
 
 export interface GalleryComponentsPropsId { 
-   lang: string;
+  lang?: string;
   textTr: {
-    [key: string]: any;
-  };
-
-  id: string;
+   [key: string]: any;
+   id?: string; 
+   role?: string;
+   lang?: string; 
+ };
+  data?: {
+  [key: string]: any;
+};
+  id?: string,
 }
-
 
 export interface GameCardProps {
   lang: string;
@@ -127,6 +137,7 @@ export interface GameCardProps {
   };
   gameData: GameData;
 }
+
 
 export interface LikesContextProps {
   likedItems: string[];
@@ -143,7 +154,59 @@ export interface FormData {
   message: string;
 }
 
+export interface RulesComponentProps {
+  role?: string;
+  textTr: {
+    [key: string]: any;
+  };
+  lang: string;
+  params?: any; 
+  id?: string; 
+}
 
+export interface RulesBtnProps {
+  lang: string;
+  textTr: {
+    [key: string]: any;
+  };
+  id: string; 
+  className?: string;
+}
 
+export interface GameComponentProps {
+  lang: string;
+  textTr?: {
+    [key: string]: any;
+    lang: string; 
+    id: string;
+  };
+  gameData?: GameData;
+  id?: string;
+}
 
+export interface GameTopicProps {
+  lang?: string;
+  textTr: {
+    [key: string]: any;
+  };
+  isOpen: boolean; 
+  onTopicSelect: (topic: string) => void;
+  id?: string;
+  newTopic: string,
+  topic: string
+}
 
+export interface PlayerData {
+  name: string;
+  ip_address: string;
+  device_info: {
+    [key: string]: any;
+  }
+}
+
+export interface GameTopicComponentProps {
+  gameTopics: string[];
+  addGameTopic: (newTopic: string) => void;
+  onTopicClick: (topic: string) => void;
+  maxLength: number;
+}

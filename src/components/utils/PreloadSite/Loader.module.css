@@ -1,0 +1,29 @@
+.loader {
+    display: block;
+    position: relative;
+    height: 15px;
+    width: 200px;
+    background: #fff;
+    overflow: hidden;
+    @media screen and (min-width: 1440px) {
+            height: 35px;
+            width: 300px;
+        }
+}
+
+.loader:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 0;
+    background: #FF730D;
+    animation: prog 1s ease-in infinite;
+}
+
+@keyframes prog {
+    to {
+        width: 100%;
+    }
+}
