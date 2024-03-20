@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 
 // I have not found the player type declaration I need.
 // If further there already exists one that fitts the requirenments
@@ -12,16 +12,33 @@ type Player = {
 type Props = {
     players: Player[],
     activePlayerId: number,
+    secondsLeft: number,
 }
 
-const Avatars:FC<Props> = ({ players, activePlayerId }) => {
+const Avatars:FC<Props> = ({ players, activePlayerId, secondsLeft }) => {
   const [ activePlayer ] = players.filter(player => player.id === activePlayerId);
+  const [greenDeg, setGreenDeg] = useState(360 - ((secondsLeft % 180 || 180) * 2));
+
+
+  useEffect(() => {
+    const greenTimeout = setInterval(() => {
+      setGreenDeg(prev => prev + 2);
+    }, 1000);
+
+    return () => {
+      clearInterval(greenTimeout);
+    }
+  }, [])
 
   return (
     <>
       <div className="flex justify-between gap-11">
         <div>
-          <img src={activePlayer.img} className="w-[54px] h-[54px] rounded-full border-orange border-2 object-cover mb-[2px]"/>
+          <img
+            src={activePlayer.img}
+            className="w-[54px] h-[54px] rounded-full object-cover mb-[2px] box-border p-[2px]"
+            style={{ background: `conic-gradient(green ${greenDeg}deg, #FD8D3B 0deg)` }}
+          />
           <p className="text-main-font-color font-normal text-xs text-center leading-4">{activePlayer.name}</p>
         </div>
 
