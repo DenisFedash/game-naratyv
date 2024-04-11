@@ -16,6 +16,7 @@ const config: Config = {
   theme: {
     colors: {
       "main-background": "#f7f6f2",
+      "selected-background":"#b2e4f4",
      
       "main-white": "#fefefe",
       "main-grey": "#dadada",
