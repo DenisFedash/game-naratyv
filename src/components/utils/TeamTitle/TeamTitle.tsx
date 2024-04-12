@@ -46,6 +46,7 @@ const TeamTitle:FC<Props> = ({ title }) => {
         onChange={handleTitleChange}
         onFocus={handleFocus}
         onBlur={handleBlur}
+        maxLength={20}
       />
     </>
   )

@@ -35,14 +35,14 @@ const Avatars:FC<Props> = ({ players, activePlayerId, secondsLeft }) => {
       <div className="flex justify-between gap-11">
         <div>
           <img
-            src={activePlayer.img}
+            src={activePlayer?.img || ""}
             className="w-[54px] h-[54px] rounded-full object-cover mb-[2px] box-border p-[2px]"
             style={{ background: `conic-gradient(green ${greenDeg}deg, #FD8D3B 0deg)` }}
           />
-          <p className="text-main-font-color font-normal text-xs text-center leading-4">{activePlayer.name}</p>
+          <p className="text-main-font-color font-normal text-xs text-center leading-4">{activePlayer?.name}</p>
         </div>
 
-        <div className="flex">
+        <div className="flex min-w-fit">
           {players.map((player, i, arr) => {
             return player.id !== activePlayerId
               ? <img
