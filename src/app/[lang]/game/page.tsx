@@ -24,11 +24,11 @@ const GamePage: FC<Props> = () => {
         <div className='grid grid-cols-3 max-w-[1280px] mx-auto mt-4 mb-14'>
           <div></div>
           <div className={`${pressStart2p.className} bg-main-background h-14 text-3xl p-2 box-border rounded-[10px] text-center selection:text-main-font-color selection:bg-selected-background`}>
-            {currentTeam.title}
+            {currentTeam?.title}
           </div>
           <div className='justify-self-end mr-5'>
             <Avatars
-              players={currentTeam.players}
+              players={currentTeam?.players}
               activePlayerId={1}
               secondsLeft={300}
             />
@@ -40,7 +40,7 @@ const GamePage: FC<Props> = () => {
             {teams.map(team => (
               <button
                 onClick={() => handleTeamChange(team.id)}
-                className={`${currentTeam.id == team.id ? "bg-main-yellow" : "bg-light-grey"} w-6 h-6 rounded-lg`}
+                className={`${currentTeam?.id == team.id ? "bg-main-yellow" : "bg-light-grey"} w-6 h-6 rounded-lg`}
               ></button>
             ))}
           </div>
