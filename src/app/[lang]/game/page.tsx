@@ -28,7 +28,7 @@ const GamePage: FC<Props> = () => {
           </div>
           <div className='justify-self-end mr-5'>
             <Avatars
-              players={currentTeam?.players}
+              players={currentTeam?.players || []}
               activePlayerId={1}
               secondsLeft={300}
             />
