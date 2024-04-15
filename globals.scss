@@ -1,0 +1,235 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+:root {
+  --main-background: #f7f6f2;
+  --main-white: #fefefe;
+  --main-font-color: #141515;
+  --main-grey: #dadada;
+  --main-yellow: #f7d062;
+  --dark-grey: #5b5b5b;
+  --gradient: #dec9ea;
+}
+
+html,
+body {
+  font-family: "Open Sans", sans-serif;
+  background: var(--main-background);
+  color: var(--main-font-color);
+  padding: 0;
+  margin: 0;
+  width: 100%;
+
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+  color: var(--main-font-color);
+  font-weight: 400;
+
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+main::-webkit-scrollbar-thumb,
+main::-webkit-scrollbar {
+  background-color: transparent;
+}
+
+.visually-hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.layout {
+  width: 390px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  @media screen and (min-width: 768px) {
+    width: 768px;
+  }
+
+  @media screen and (min-width: 1440px) {
+    width: 1440px;
+    padding-left: 80px;
+    padding-right: 80px;
+  }
+}
+
+/* Анимация для входящих карточек */
+/* Animation for incoming cards when sliding in from the right */
+.slide-in-left {
+  animation: slide-in-right 1s forwards;
+}
+
+@keyframes slide-in-right {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Animation for incoming cards when sliding in from the left */
+.slide-in-right {
+  animation: slide-in-left 1s forwards;
+}
+
+@keyframes slide-in-left {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Animation for outgoing cards when sliding out to the left */
+.slide-out-right {
+  animation: slide-out-left 1s forwards;
+}
+
+@keyframes slide-out-left {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+/* Animation for outgoing cards when sliding out to the right */
+.slide-out-left {
+  animation: slide-out-right 1s forwards;
+}
+
+@keyframes slide-out-right {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.darkened::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,
+      0,
+      0,
+      0.3);
+  /* Задайте желаемый цвет фона и прозрачность */
+  z-index: 1;
+  /* Позиционируйте его над содержимым элемента */
+  border-radius: 10px;
+}
+
+/* Настройте затемнение для вложенных элементов, если необходимо */
+.darkened img,
+.darkened button {
+  opacity: 0.2;
+  /* Установите желаемую прозрачность для вложенных элементов */
+}
+
+.keen-slider-custom {
+  min-width: 580px !important;
+}
+
+.arrow--disabled {
+  fill: rgba(255, 255, 255, 0.5);
+}
+
+.dots {
+  display: flex;
+  padding: 10px 0;
+  justify-content: center;
+  align-items: center;
+}
+
+.dot {
+  border: none;
+  width: 9px;
+  height: 9px;
+  background: #dadada;
+  border-radius: 50%;
+  margin: 0 5px;
+  padding: 5px;
+  cursor: pointer;
+
+  @media screen and (min-width: 768px) {
+    width: 10px;
+    height: 10px;
+  }
+
+  @media screen and (min-width: 1440px) {}
+}
+
+.dot:focus {
+  outline: none;
+}
+
+.dot.active {
+  background: #ff730d;
+  width: 16px;
+  height: 16px;
+
+  @media screen and (min-width: 768px) {}
+
+  @media screen and (min-width: 1440px) {}
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  height: 100%;
+}
+
+.content {
+  height: 100%;
+  flex: 1 1;
+}
+
+.shadow-yellow-3xl {
+  --tw-shadow: -12px 12px 0px 0px #F7D062;
+  --tw-shadow-colored: -12px 12px 0px 0px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), 
+  var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}

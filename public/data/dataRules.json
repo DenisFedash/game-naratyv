@@ -1,0 +1,253 @@
+[
+    {
+     "id": "naratyv-creatyv",
+     "role": "details",
+     "num": "1.",
+     "rulesUa": {
+      "rule": "Креативити: ",
+      "rule1": "намалюйте фантастичну картину з чистого полотна та разом вигадайте до неї епічну історію."
+     },
+      "rulesEn": {
+        "rule": "Be creative:  ",
+        "rule1": "paint a fantastic picture from scratch and come up with an epic story for it together."
+      },
+      "img": "/img/rules-arrow.png"    
+   },
+   {
+     "id": "naratyv-creatyv" ,
+     "role": "details",
+     "num": "2.",
+     "rulesUa": {
+       "rule": "Працювати в команді: ",
+       "rule1": "творіть по черзі та уважно слухайте інших гравців, щоб історія вийшла звʼязною."
+     },
+     "rulesEn": {
+      "rule": "Work in a team: ",
+      "rule1": "take turns and listen carefully to the other players to make the story coherent."
+     },
+     "img": "/img/rules-arrow.png"  
+   },
+   {
+      "id": "naratyv-creatyv" ,
+      "role": "details",
+      "num": "3.",
+      "rulesUa": {
+         "rule": "Дуркувати: ",
+         "rule1": "жодних обмежень вашого творчого польоту, лише дотримуйтесь теми гри та стежте за таймером."
+       },
+       "rulesEn": {
+        "rule": "To fool around: ",
+        "rule1": "no restrictions on your creative flight, just stick to the theme of the game and keep an eye on the timer."
+       },
+       "img": "/img/rules-arrow.png"   
+   },
+   {
+      "id": "naratyv-creatyv" ,
+      "role": "details",
+      "num": "4.",
+      "rulesUa": {
+         "rule": "Змагатися: ",
+         "rule1": "презентуйте свій шедевр іншій команді або просто збережіть його у галереї гри, щоб почати збирати лайки!"
+       },
+       "rulesEn": {
+        "rule": "To compete: ",
+        "rule1": "present your masterpiece to the other team or simply save it to the game gallery to start collecting likes!"
+       },
+       "img": "/img/rules-arrow.png"    
+   },
+   {
+      "id": "naratyv-creatyv" ,
+      "role": "details",
+      "num": "5.",
+      "rulesUa": {
+         "rule": "Дружити: ",
+         "rule1": "спілкуйтеся під час гри та й поза грою, допомагайте одне одному та веселіться, адже це – запорука міцної команди!"
+       },
+       "rulesEn": {
+        "rule": "To be friends: ",
+        "rule1": "communicate during and after the game, help each other and have fun, because this is the key to a strong team!"
+       }
+   },    
+ 
+{
+   "id": "naratyv-creatyv",
+   "role": "player",
+   "descriptionUa": {
+      "description1": "Намалюй частинку картини та придумай до неї міні-історію.",
+      "description2": "Передай хід наступному учаснику.",
+      "description3": "Тим часом запиши рядки своєї розповіді (або доручи це адміну твоєї команди)."
+   },
+   "descriptionEn": {
+      "description1": "Draw a part of the picture and come up with a mini-story for it.",
+      "description2": "Pass the move to the next participant.",
+      "description3": "In the meantime, write down the lines of your story (or have your team admin do it)."
+   },
+   "num": "1.",
+   "rulesUa": {
+      "rule": "Перші кроки: ",
+      "rule1": "зайдіть у гру та ознайомтеся з темою наративу, яку обрав ваш адмін."
+   },
+   "rulesEn": {
+      "rule": "First steps: ",
+      "rule1": "log in to the game and familiarize yourself with the narrative theme that your admin has chosen."
+}
+},
+{
+   "id": "naratyv-creatyv",
+   "role": "player",
+   "num": "2.",
+   "rulesUa": {
+      "rule": "Як спілкуватися з командою? ",
+      "rule1": "Створіть відеозустріч для своєї команди (гугл міт або зум)"
+   },
+   "rulesEn": {
+      "rule": "How to communicate with the team? ",
+      "rule1": "Create a video meeting for your team (Google hangout or zoom)"
+   }
+},
+{
+   "id": "naratyv-creatyv",
+   "role": "player",
+   "num": "3.",
+   "rulesUa": {
+      "rule": "Хто ви? ",
+      "rule1": "Придумайте назву для команди."
+   },
+   "rulesEn": {
+      "rule": "Who are you? ",
+      "rule1": "Come up with a name for the team"
+   }
+},
+{
+   "id": "naratyv-creatyv",
+   "role": "player",
+   "num": "4.",
+   "rulesUa": {
+      "rule": "Визначте сміливця: ",
+      "rule1": "Домовтеся про порядок гравців."
+   },
+   "rulesEn": {
+      "rule": "Identify the brave one: ",
+      "rule1": "Agree on the order of players."
+   }
+},
+{
+   "id": "naratyv-creatyv",
+   "role": "player",
+   "num": "5.",
+   "rulesUa": {
+      "rule": "У свій хід: ",
+      "rule1": "ходіть по черзі та стежте за своїм таймером. Ви можете обирати фон вашого полотна, а також колір олівця."
+   },
+   "rulesEn": {
+      "rule": "On your turn: ",
+      "rule1": "take turns and keep an eye on your timer. You can choose the background of your canvas as well as the color of your pencil."
+   }
+},
+{
+   "id": "naratyv-creatyv",
+   "role": "player",
+   "num": "6.",
+   "rulesUa": {
+      "rule": "Збережіть канву історії: ",
+      "rule1": "уважно слухайте інших, щоб скласти звʼязну історію."
+   },
+   "rulesEn": {
+      "rule": "Preserve the outline of the story: ",
+      "rule1": "listen carefully to others to build a coherent story."
+   }
+},
+{
+   "id": "naratyv-creatyv",
+   "role": "player",
+   "num": "7.",
+   "rulesUa": {
+      "rule": "Скільки грати? ",
+      "rule1": "Грайте, поки не вийде час"
+   },
+   "rulesEn": {
+      "rule": "How long to play? ",
+      "rule1": "Play until you run out of time."
+   }
+},
+{
+   "id": "naratyv-creatyv",
+   "role": "player",
+   "num": "8.",
+   "rulesUa": {
+      "rule": "Як залишити свій шедевр в історії? ",
+      "rule1": "Презентуйте свою роботу іншій команді."
+   },
+   "rulesEn": {
+      "rule": "How to leave your masterpiece in history? ",
+      "rule1": "Present your work to the other team."
+   }
+},
+{
+   "id": "naratyv-creatyv",
+   "role": "admin",
+   "descriptionUa": "Гра “Наратив-креатив” розрахована на мінімум дві команди по 5-10 учасників, які будуть разом створювати унікальні мальовані історії.",
+   "descriptionEn": "The “Narrative Creative” game is designed for at least two teams of 5-10 participants, who will create unique drawn stories together.",
+   "num": "1.",
+   "rulesUa": {
+      "rule": "Перші кроки: ",
+      "rule1": "натисніть на кнопку “Створити гру”, щоб згенерувати унікальне посилання, та пошерте його  учасникам, які будуть грати в команді. Учасники будуть рандомно розподілені між командами порівну."
+   },
+   "rulesEn": {
+      "rule": "First steps: ",
+      "rule1": "click on the “Create a game” button to generate a unique link and send it to the participants who will play in the team. Participants will be randomly assigned to teams equally."
+   }   
+},
+{
+   "id": "naratyv-creatyv",
+   "role": "admin",
+   "num": "2.",
+   "rulesUa": {
+      "rule": "Оберіть тему: ",
+      "rule1": "виберіть одну з запропонованих тем зі списку або введіть свою у полі “Створити тему.”"
+   },
+   "rulesEn": {
+      "rule": "Choose a topic: ",
+      "rule1": "select one of the suggested topics from the list or enter your own in the Create a topic field."
+   }   
+},
+{
+   "id": "naratyv-creatyv",
+   "role": "admin",
+   "num": "3.",
+   "rulesUa": {
+      "rule": "Встановіть таймери: ",
+      "rule1": "налаштуйте тривалість гри."
+   },
+   "rulesEn": {
+      "rule": "Set timers: ",
+      "rule1": "set the game duration."
+   }   
+},
+{
+   "id": "naratyv-creatyv",
+   "role": "admin",
+   "num": "4.",
+   "rulesUa": {
+      "rule": "Адмініструйте гру: ",
+      "rule1": "перемикайтеся між полями гри та слідкуйте за командами в режимі реального часу."
+   },
+   "rulesEn": {
+      "rule": "Manage the game: ",
+      "rule1": "switch between game fields and follow teams in real time."
+   }   
+},
+{
+   "id": "naratyv-creatyv",
+   "role": "admin",
+   "num": "5.",
+   "rulesUa": {
+      "rule": "Модеруйте презентації команд: ",
+      "rule1": "після завершення таймеру гри, вас автоматично перенаправить в галерею гри, де ви побачите малюнки своїх команд. Прослідкуйте, щоб кожна команд презентувала свій малюнок і розповідь до нього, а також розповіла про командну роботу і складнощі, які виникали в процесі."
+   },
+   "rulesEn": {
+      "rule": "Moderate team presentations: ",
+      "rule1": "After the game timer expires, you will be automatically redirected to the game gallery, where you will see images created by your teams. Ensure that each team presents their picture and provides a narrative about it, as well as discusses teamwork and challenges encountered during the process."
+   }   
+ } 
+]

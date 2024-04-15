@@ -16,6 +16,7 @@ const config: Config = {
   theme: {
     colors: {
       "main-background": "#f7f6f2",
+      "selected-background":"#b2e4f4",
      
       "main-white": "#fefefe",
       "main-grey": "#dadada",
@@ -29,7 +30,6 @@ const config: Config = {
       "icon-move-color": "#F7EAC6",
       "error-color": "#ff0000",
       "card-bg": "#F7F6F2",
-
       "main-font-color": "#141515",
       "second-font-color": "#fd8d3b",   
     },
@@ -47,6 +47,7 @@ const config: Config = {
       },
       backgroundImage: {
          "gradient-card": "linear-gradient(180deg, #DEC9EA 0%, rgba(255, 245, 0, 0.00) 100%)",
+         "keyboard": "url(/icon/icon-keyboard.svg)"
       }
     },
   },

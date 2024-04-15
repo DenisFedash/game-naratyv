@@ -1,90 +1,4 @@
 {
-    "header":{
-        "headerAbout": "About us",
-        "headerCatalog": "Catalog",
-        "headerMain": "Main",
-        "headerContacts": "Contacts",
-        "headerPartner": "Become a partner",
-        "headerConnect": "Contact us",
-        "headerPrivacy": "Privacy Policy",
-        "headerConditions": "Conditions of participation",
-        "headerRights": "Developed by Junfolio 2023. All rights reserved"
-    },
-    "hero":{
-        "heroTitle2": "United in play",
-         "heroTitle3": "stronger together!"
-    },
-    "advantages":{
-        "advantagesTitle": "Our advantages",
-        "advantagesText": "We have created this resource where teams can come together to develop their skills and interaction through exciting online games. Each game on our site is carefully selected taking into account the basic principles of team building, which contribute to the formation of a cohesive team.",
-        "advantagesItemDevName": "Development",
-        "advantagesItemDevText": "Our games not only help to improve teamwork, but also encourage personal growth and development of each participant.",
-        "advantagesItemCoopName": "Cooperation",
-        "advantagesItemCoopText": "Team building helps participants understand each other better and work as one effective mechanism.",
-        "advantagesItemExchName": "Exchange of experience",
-        "advantagesItemExchText": "You can chat with other teams, share your successes, ask for advice and learn from each other.",
-        "advantagesItemEntertName": "Entertainment",
-        "advantagesItemEntertText": "We believe that learning can be exciting and fun. Our games help you feel the joy of achieving common goals."
-    },
-    "actualGame":{
-        "actualGameTitle": "Naratyv-Creative",
-        "actualGameLogo": "New",
-        "actualGameText": "Discover the fascinating world of our narrative and creative game! It's an unpredictable journey where each team creates their own unique narrative through the art of drawing and storytelling.",
-        "actualGameBtn": "Play"
-    },
-    "ourGames":{
-        "ourGamesTitle": "Our Games",
-        "like": "Like",
-         "gameBtn": "Play",
-         "linkCatalog": "To catalog",
-         "pcGameMessage": "Use PC to play"
-    },
-    "statistic":{
-        "statisticTitle": "We are in numbers",
-         "numberOfGames": "Number of games",
-        "playForThisTime": "Played during this time",
-        "numberOfTeams": "Number of teams"
-    },
-    "footer":{
-        "footerTitle": "Footer",
-        "footerMain": "Home",
-        "footerAbout": "About us",
-        "footerCatalog": "Catalog",
-        "footerContacts": "Contacts",
-        "footerPartner": "Become a partner",
-        "footerConnect": "Contact us",
-        "footerPrivacy": "Privacy Policy",
-        "footerConditions": "Conditions of participation",
-        "footerRights": "Developed by Junfolio 2023. All rights reserved"
-    },
-    "about":{
-        "aboutTitle": "About us",
-         "aboutTextTitle": "CoLAB",
-        "aboutTextOne": "Welcome to ",
-        "aboutTextTwo": ", where play becomes a means of strengthening team spirit and achieving common goals! We are a team of enthusiasts who believe in the power of collaborative interaction and fun learning.",
-        "aboutTextThree": "Our mission is to provide you with an unforgettable experience of team building games that promote communication, leadership and team building.",
-        "aboutLinkConnect": "Contact us",
-        "aboutPhilosophyTitle": "Our philosophy",
-        "aboutPhilosophyTextOne": "We believe that the best achievements are born when people work together. That's why we've developed this resource where teams can come together to develop their skills and improve collaboration using exciting online games.",
-        "aboutPhilosophyTextTwo": "Each game on our site is selected taking into account the basic principles of team building, which contribute to the creation of a unified and effective team.",
-        "aboutTeamTitle": "Development team",
-        "aboutPartnersTitle": "Our partners",
-        "aboutPartnersTextOne": "We are glad to offer you to become our partner. Working with us opens up many advantages and opportunities for the development of your team, and as a result, high productivity and motivation of all company members.",
-        "aboutPartnersTextTwo": "By becoming our partner, you get the opportunity to increase productivity, due to the cohesion of the internal atmosphere of the team and the development of business in general.",
-        "aboutLinkPartners": "Work with us"
-    },
-     "catalog":{
-        "catalogTitle": "Catalog of games",
-        "gameBtn": "Play",
-        "like": "Like",
-        "pcGameMessage": "Use PC to play",
-        "single": "Individual games",
-        "team": "Group games",
-        "all": "All games",
-        "popularity": "Popularity",
-        "newness": "Novelty",
-        "participants": "Number of participants"
-    },
     "contacts":{
         "contactsTitle": "Contacts",
         "contactsName": "Name",
@@ -117,11 +31,46 @@
         "galleryMore": "Download more",
         "galleryBtn": "To the game page",
         "galleryItemBtn": "To Gallery",
-        "galleryLike": "Like",
-        "glleryBtn": "Download more"
+        "galleryLike": "Like"
     },
-     "error":{
-        "errorName": "Something went wrong",
-        "errorBtn": "To the main page"
-    }
+    "rulesGame":{
+         "rulesBtnUser": "Player Guide",
+         "rulesBtnAdmin": "Admin Guide",
+         "createGameBtn": "Create a game",
+         "galleryBtn": "Gallery",
+         "ruleBtnGoBack": "Go Back",
+         "btnCatalog": "Back to Catalog",
+
+         "rulePlayerStartGame": "Welcome to the game! ",
+         "rulePlayerStartGameText": "Write a nickname that other players can see",
+         "rulePlayerAddNicknameInput": "Write your nickname",
+         
+         "ruleDetailsTitle": "What can you do in this game?",
+         "community": "Community choice",
+         "ruleAdminTitleCreateGame": "How to create a game for the team?",  
+         "rulePlayerTitle": "How to play?",
+
+         "ruleEthics": "Remember!",
+         "ruleEthics1": "1. Respect other players and their creativity!",
+         "ruleEthics2": "2. Keep track of your time!",
+         "ruleEthics3": "3. Have fun!(Enjoy the process.)"
+    },
+    "gameSettings": {
+        "gameSettingsTitle": "Game settings",
+        "timer": "Start the game via",
+        "restartTimer": "Restart the timer",
+
+        "topic": "The theme of the game",
+        "gameTopic": "Haunted house on the hill",
+        "gameTopic1": "Ruins of an ancient castle near the lake",
+        "gameTopic2": "A hut in a deep forest at dusk",
+
+        "selectTopic": "Choose a theme",
+        "cancelGame": "Cancel the game",
+        "linkGame": "link to the game",
+        "popup": "Copied! Link active for 3 minutes",
+
+        "team": "Team A",
+        "team1": "Team B"
+    }   
 }
