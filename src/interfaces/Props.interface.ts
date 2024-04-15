@@ -12,12 +12,21 @@ export interface TextFCComponentsProps {
 
 export interface ColorProps{
   onColorSelect: (color: string) => void;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsOpenColor: React.Dispatch<React.SetStateAction<boolean>>;
   
 }
 
+export interface ShapesModalProps {
+  setIsOpenFigure: React.Dispatch<React.SetStateAction<boolean>>;
+  onSelectShape: (shape: string) => void;
+}
+
+
 export interface FigureProps{
-  selectedColor: string | null
+  selectedColor: string | null;
+  selectedShape: string | null;
+  setSelectedShape: Dispatch<SetStateAction<string | null>>;
+   
   
 }
 

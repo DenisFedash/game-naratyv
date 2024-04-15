@@ -10,14 +10,29 @@ import iconBg from "../../../public/icons/icon-background.svg";
 import iconBack from "../../../public/icons/icon-back.svg";
 import iconFwd from "../../../public/icons/icon-fwd.svg";
 import iconFile from "../../../public/icons/icon-file.svg";
+import ShapesModal from "../FigurePicker/Modal";
+import { DrawingBoard } from "../FigurePicker/FigurePicker";
+import { Canvas } from "../Canva/Canva";
 import { ColorPicker } from "../ColorPicker/ColorPicker";
 
 export const FieldGame = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedColor, setSelectedColor] = useState<string | null>(null);
+  const [isOpenColor, setIsOpenColor] = useState(false);
+  const [isOpenFigure, setIsOpenFigure] = useState(false);
+  const [drawingData, setDrawingData] = useState<any>(null);
 
+  const handleDrawingUpdate = (updatedDrawingData: any) => {
+    setDrawingData(updatedDrawingData);
+  };
+
+  const [selectedColor, setSelectedColor] = useState<string | null>(null);
+  const [selectedShape, setSelectedShape] = useState<string | null>(null);
+  console.log("selectedShape2", selectedShape);
   const handleColorSelect = (color: string) => {
     setSelectedColor(color);
+  };
+
+  const selectShape = (shape: string) => {
+    setSelectedShape(shape);
   };
 
   return (
@@ -54,7 +69,7 @@ export const FieldGame = () => {
           />
           <div
             className="cursor-pointer relative"
-            onClick={() => setIsOpen(!isOpen)}
+            onClick={() => setIsOpenColor(!isOpenColor)}
           >
             <Image
               src={iconPen}
@@ -63,9 +78,9 @@ export const FieldGame = () => {
               height="0"
               className="mb-24 w-12 h-auto"
             />
-            <div className={isOpen ? "absolute -top-6 left-16" : "hidden"}>
+            <div className={isOpenColor ? "absolute -top-6 left-16" : "hidden"}>
               <ColorPicker
-                setIsOpen={setIsOpen}
+                setIsOpenColor={setIsOpenColor}
                 onColorSelect={(color) => {
                   handleColorSelect(color);
                 }}
@@ -73,13 +88,26 @@ export const FieldGame = () => {
             </div>
           </div>
 
-          <Image
-            src={iconFigures}
-            alt="figures"
-            width="0"
-            height="0"
-            className="mb-24 w-12 h-auto"
-          />
+          <div
+            className="cursor-pointer relative"
+            onClick={() => setIsOpenFigure(!isOpenFigure)}
+          >
+            <Image
+              src={iconFigures}
+              alt="figures"
+              width="0"
+              height="0"
+              className="mb-24 w-12 h-auto"
+            />
+            <div
+              className={isOpenFigure ? "absolute -top-6 left-16" : "hidden"}
+            >
+              <ShapesModal
+                setIsOpenFigure={setIsOpenFigure}
+                onSelectShape={selectShape}
+              />
+            </div>
+          </div>
           <Image
             src={iconBg}
             alt="background"
@@ -131,12 +159,14 @@ export const FieldGame = () => {
             </div>
           </div>
           <div>
-            <canvas
-              width={1172}
-              height={448}
-              className=" bg-main-white border border-dark-grey"
+            <DrawingBoard
+              selectedColor={selectedColor}
+              selectedShape={selectedShape}
+              setSelectedShape={setSelectedShape}
+              color={selectedColor}
             />
           </div>
+          <div>{/* <Canvas color={selectedColor} /> */}</div>
         </div>
       </div>
     </div>

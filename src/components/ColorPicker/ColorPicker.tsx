@@ -1,6 +1,7 @@
 "use client";
 import { ColorProps } from "@/interfaces/Props.interface";
 import React, { FC, useEffect, useState } from "react";
+import { FieldGame } from "../FiledGame/FieldGame";
 
 const colorList = [
   "#141515",
@@ -11,12 +12,11 @@ const colorList = [
   "#FEFEFE",
 ];
 
-interface ColorPickerProps {
-  onColorSelect: (color: string) => void;
-}
-
-export const ColorPicker: FC<ColorProps> = ({ onColorSelect, setIsOpen }) => {
-  const [selectedColor, setSelectedColor] = useState<string | null>(null);
+export const ColorPicker: FC<ColorProps> = ({
+  onColorSelect,
+  setIsOpenColor,
+}) => {
+  const [selectedColor, setSelectedColor] = useState<string>("");
   console.log("Color", selectedColor);
 
   const handleColorClick = (color: string) => {
@@ -29,7 +29,7 @@ export const ColorPicker: FC<ColorProps> = ({ onColorSelect, setIsOpen }) => {
       <div
         onClick={() => {
           handleColorClick(color);
-          setIsOpen(false);
+          setIsOpenColor(false);
         }}
         key={color}
         className="w-6 h-6 rounded-full cursor-pointer"
@@ -44,9 +44,13 @@ export const ColorPicker: FC<ColorProps> = ({ onColorSelect, setIsOpen }) => {
         className="w-[124px] bg-main-grey grid grid-cols-3 gap-2.5 px-4 py-5 rounded-lg z-10"
       >
         {colorGrid}
-      </div>
-      <div className="mt-4">
-        <p>Выбранный цвет: {selectedColor}</p>
+        {/* <div>
+          <input
+            value={selectedColor}
+            type="color"
+            onChange={() => handleColorClick}
+          />
+        </div> */}
       </div>
     </div>
   );

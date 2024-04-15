@@ -1,36 +1,91 @@
-// components/ShapesModal.tsx
-import React, { useEffect } from "react";
-import Modal from "react-modal";
+import { ShapesModalProps } from "@/interfaces/Props.interface";
+import React, { FC, useEffect } from "react";
+import iconSquare from "../../../public/icons/square.svg";
+import iconDiamond from "../../../public/icons/icon-diamond.svg";
+import iconTriangle from "../../../public/icons/icon-triangle.svg";
+import iconLine from "../../../public/icons/icon-line.svg";
+import iconArrowLine from "../../../public/icons/icon-arrow-line.svg";
+import Image from "next/image";
 
-interface ShapesModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  onSelectShape: (shape: string) => void;
-}
-
-const ShapesModal: React.FC<ShapesModalProps> = ({
-  isOpen,
-  onClose,
+const ShapesModal: FC<ShapesModalProps> = ({
+  setIsOpenFigure,
   onSelectShape,
 }) => {
   return (
-    <Modal
-      isOpen={isOpen}
-      ariaHideApp={false}
-      onRequestClose={onClose}
-      contentLabel="Choose a Shape"
-    >
-      <div className="flex flex-col items-center">
-        <h2 className="text-xl font-bold mb-4">Choose a Shape</h2>
-        <button className="mb-2" onClick={() => onSelectShape("circle")}>
-          Circle
+    <div>
+      <div className="w-[124px] bg-main-grey grid grid-cols-3 gap-2.5 px-4 py-5 rounded-lg z-10">
+        <button
+          onClick={() => {
+            onSelectShape("square");
+            setIsOpenFigure(false);
+          }}
+        >
+          <Image
+            src={iconSquare}
+            alt="icon-square"
+            width={0}
+            height={0}
+            className="w-6 h-auto"
+          />
         </button>
-        <button className="mb-2" onClick={() => onSelectShape("square")}>
-          Square
+        <button
+          onClick={() => {
+            onSelectShape("diamond");
+            setIsOpenFigure(false);
+          }}
+        >
+          <Image
+            src={iconDiamond}
+            alt="icon-diamond"
+            width={0}
+            height={0}
+            className="w-6 h-auto"
+          />
         </button>
-        <button onClick={() => onSelectShape("triangle")}>Triangle</button>
+        <button
+          onClick={() => {
+            onSelectShape("triangle");
+            setIsOpenFigure(false);
+          }}
+        >
+          <Image
+            src={iconTriangle}
+            alt="icon-triangle"
+            width={0}
+            height={0}
+            className="w-6 h-auto"
+          />
+        </button>
+        <button
+          onClick={() => {
+            onSelectShape("line");
+            setIsOpenFigure(false);
+          }}
+        >
+          <Image
+            src={iconLine}
+            alt="icon-line"
+            width={0}
+            height={0}
+            className="w-6 h-auto"
+          />
+        </button>
+        <button
+          onClick={() => {
+            onSelectShape("arrowLine");
+            setIsOpenFigure(false);
+          }}
+        >
+          <Image
+            src={iconArrowLine}
+            alt="icon-arrow-line"
+            width={0}
+            height={0}
+            className="w-6 h-auto"
+          />
+        </button>
       </div>
-    </Modal>
+    </div>
   );
 };
 
