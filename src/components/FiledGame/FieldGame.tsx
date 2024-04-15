@@ -37,7 +37,7 @@ export const FieldGame = () => {
 
   return (
     <div className="layout">
-      <ul className="flex items-center justify-end my-11">
+      {/* <ul className="flex items-center justify-end my-11">
         {dataTeam.map(({ id, name, icon }, index) => (
           <li
             key={id}
@@ -53,7 +53,7 @@ export const FieldGame = () => {
             />
           </li>
         ))}
-      </ul>
+      </ul> */}
       <h1 className={`text-center text-3xl mb-4 ${pressStart2p.className}`}>
         Назва команди
       </h1>
