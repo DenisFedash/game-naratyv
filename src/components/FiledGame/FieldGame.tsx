@@ -14,9 +14,12 @@ import ShapesModal from "../FigurePicker/Modal";
 import { DrawingBoard } from "../FigurePicker/FigurePicker";
 import { Canvas } from "../Canva/Canva";
 import { ColorPicker } from "../ColorPicker/ColorPicker";
+import { BgColorPicker } from "../ColorPicker/BgColorPicker";
 
 export const FieldGame = () => {
   const [isOpenColor, setIsOpenColor] = useState(false);
+  const [isOpenBgColor, setIsOpenBgColor] = useState(false);
+
   const [isOpenFigure, setIsOpenFigure] = useState(false);
   const [drawingData, setDrawingData] = useState<any>(null);
 
@@ -25,10 +28,16 @@ export const FieldGame = () => {
   };
 
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
+  const [selectedBgColor, setSelectedBgColor] = useState<string | null>(null);
   const [selectedShape, setSelectedShape] = useState<string | null>(null);
-  console.log("selectedShape2", selectedShape);
+  console.log("selectedBgColor", selectedBgColor);
+
   const handleColorSelect = (color: string) => {
     setSelectedColor(color);
+  };
+
+  const handleBgColorSelect = (color: string) => {
+    setSelectedBgColor(color);
   };
 
   const selectShape = (shape: string) => {
@@ -108,13 +117,28 @@ export const FieldGame = () => {
               />
             </div>
           </div>
-          <Image
-            src={iconBg}
-            alt="background"
-            width="0"
-            height="0"
-            className="w-12 h-auto"
-          />
+          <div
+            className="cursor-pointer relative"
+            onClick={() => setIsOpenBgColor(!isOpenBgColor)}
+          >
+            <Image
+              src={iconBg}
+              alt="background"
+              width="0"
+              height="0"
+              className="w-12 h-auto"
+            />
+            <div
+              className={isOpenBgColor ? "absolute -top-6 left-16" : "hidden"}
+            >
+              <BgColorPicker
+                setIsOpenBgColor={setIsOpenBgColor}
+                onColorSelect={(color) => {
+                  handleBgColorSelect(color);
+                }}
+              />
+            </div>
+          </div>
         </div>
         <div>
           <div className=" bg-main-white flex items-center justify-between h-[66px] shadow-panel-shadow mb-2">
@@ -159,14 +183,20 @@ export const FieldGame = () => {
             </div>
           </div>
           <div>
-            <DrawingBoard
+            {/* <DrawingBoard
               selectedColor={selectedColor}
               selectedShape={selectedShape}
               setSelectedShape={setSelectedShape}
               color={selectedColor}
+            /> */}
+          </div>
+          <div>
+            <Canvas
+              color={selectedColor}
+              selectedBgColor={selectedBgColor}
+              setSelectedBgColor={setSelectedBgColor}
             />
           </div>
-          <div>{/* <Canvas color={selectedColor} /> */}</div>
         </div>
       </div>
     </div>

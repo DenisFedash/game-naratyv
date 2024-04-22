@@ -1,102 +1,140 @@
-import React, { FC, useEffect, useRef, useState } from "react";
-import { Socket, io } from "socket.io-client";
+import React, { FC, useEffect, useState } from "react";
+import { io, Socket } from "socket.io-client";
 
 interface CanvasProps {
   color: string | null;
+  selectedBgColor: string | null;
+  setSelectedBgColor: (color: string) => void;
 }
 
-export const Canvas: FC<CanvasProps> = ({ color }) => {
+export const Canvas: FC<CanvasProps> = ({
+  color,
+  selectedBgColor,
+  setSelectedBgColor,
+}) => {
   const [socket, setSocket] = useState<Socket | undefined>(undefined);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [imageData, setImageData] = useState<string | null>(null);
+  const [eraserMode, setEraserMode] = useState(false);
+  const [eraserStartPoint, setEraserStartPoint] = useState<{
+    x: number;
+    y: number;
+  } | null>(null);
+  console.log("selectedBgColor", selectedBgColor);
 
   useEffect(() => {
     const s = io("http://localhost:5000");
     setSocket(s);
+
+    s.emit("get-canvas-data");
+
     return () => {
       s.disconnect();
     };
   }, []);
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) {
-      return;
-    }
-
-    const ctx = canvas.getContext("2d");
-    if (!ctx) {
-      return;
-    }
-
-    const sketch = document.querySelector<HTMLElement>("#sketch");
-    if (!sketch) {
-      return;
-    }
-
-    const sketch_style = getComputedStyle(sketch);
-    canvas.width = parseInt(sketch_style.getPropertyValue("width"));
-    canvas.height = parseInt(sketch_style.getPropertyValue("height"));
-
-    let isDrawing = false;
-    let lastPosition: { x: number; y: number } | null = null;
-
-    const handleMouseDown = (e: MouseEvent) => {
-      isDrawing = true;
-      lastPosition = {
-        x: e.pageX - canvas.offsetLeft,
-        y: e.pageY - canvas.offsetTop,
-      };
+    const handleCanvasData = (data: string) => {
+      setImageData(data);
+      drawImageOnCanvas(data);
     };
 
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!isDrawing) return;
-
-      const currentPosition = {
-        x: e.pageX - canvas.offsetLeft,
-        y: e.pageY - canvas.offsetTop,
-      };
-
-      if (lastPosition) {
-        ctx.beginPath();
-        ctx.moveTo(lastPosition.x, lastPosition.y);
-        ctx.lineTo(currentPosition.x, currentPosition.y);
-        ctx.strokeStyle = color || "black";
-        ctx.lineWidth = 2;
-        ctx.stroke();
-        ctx.closePath();
-
-        // Emit drawing data to the server
-        if (socket) {
-          socket.emit("draw", {
-            lastPosition,
-            currentPosition,
-            color,
-          });
-        }
-      }
-
-      lastPosition = currentPosition;
-    };
-
-    const handleMouseUp = () => {
-      isDrawing = false;
-      lastPosition = null;
-    };
-
-    canvas.addEventListener("mousedown", handleMouseDown);
-    canvas.addEventListener("mousemove", handleMouseMove);
-    canvas.addEventListener("mouseup", handleMouseUp);
+    if (socket) {
+      socket.on("canvas-data", handleCanvasData);
+    }
 
     return () => {
-      canvas.removeEventListener("mousedown", handleMouseDown);
-      canvas.removeEventListener("mousemove", handleMouseMove);
-      canvas.removeEventListener("mouseup", handleMouseUp);
+      if (socket) {
+        socket.off("canvas-data", handleCanvasData);
+      }
     };
-  }, [color, socket]);
+  }, [socket]);
+
+  useEffect(() => {
+    if (socket && selectedBgColor !== null) {
+      socket.emit("background-color", selectedBgColor);
+    }
+  }, [selectedBgColor, socket]);
+
+  useEffect(() => {
+    if (socket) {
+      socket.on("background-color", (color) => {
+        setSelectedBgColor(color);
+      });
+    }
+  }, [socket, setSelectedBgColor]);
+
+  useEffect(() => {
+    if (socket && imageData) {
+      socket.emit("canvas-data", imageData);
+    }
+  }, [socket, imageData]);
+
+  const drawImageOnCanvas = (data: string) => {
+    const canvas = document.querySelector<HTMLCanvasElement>("#board");
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const image = new Image();
+    image.onload = () => {
+      ctx.drawImage(image, 0, 0);
+    };
+    image.src = data;
+  };
+
+  const handleCanvasMouseDown = (e: React.MouseEvent<HTMLCanvasElement>) => {
+    const canvas = document.querySelector<HTMLCanvasElement>("#board");
+    if (!canvas || !socket) return;
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const rect = canvas.getBoundingClientRect();
+    const offsetX = e.clientX - rect.left;
+    const offsetY = e.clientY - rect.top;
+
+    ctx.beginPath();
+    ctx.moveTo(offsetX, offsetY);
+
+    const handleCanvasMouseMove = (event: MouseEvent) => {
+      const offsetX = event.clientX - rect.left;
+      const offsetY = event.clientY - rect.top;
+
+      ctx.lineTo(offsetX, offsetY);
+      ctx.strokeStyle = color || "black";
+      ctx.lineWidth = 2;
+      ctx.stroke();
+    };
+
+    const handleCanvasMouseUp = () => {
+      canvas.removeEventListener("mousemove", handleCanvasMouseMove);
+      canvas.removeEventListener("mouseup", handleCanvasMouseUp);
+
+      const base64ImageData = canvas.toDataURL("image/png");
+      setImageData(base64ImageData);
+
+      // Send the updated canvas data to the server
+      if (socket) {
+        socket.emit("canvas-data", base64ImageData);
+      }
+    };
+
+    canvas.addEventListener("mousemove", handleCanvasMouseMove);
+    canvas.addEventListener("mouseup", handleCanvasMouseUp);
+  };
 
   return (
     <div className="bg-main-white border border-dark-grey" id="sketch">
-      <canvas ref={canvasRef} width={1172} height={448} id="board"></canvas>
+      <canvas
+        width={1172}
+        height={448}
+        id="board"
+        onMouseDown={handleCanvasMouseDown}
+        style={{
+          backgroundColor: selectedBgColor ? selectedBgColor : "transparent",
+        }}
+      ></canvas>
     </div>
   );
 };

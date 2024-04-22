@@ -13,7 +13,11 @@ export interface TextFCComponentsProps {
 export interface ColorProps{
   onColorSelect: (color: string) => void;
   setIsOpenColor: React.Dispatch<React.SetStateAction<boolean>>;
-  
+}
+
+export interface BgColorProps{
+  onColorSelect: (color: string) => void;
+  setIsOpenBgColor: React.Dispatch<React.SetStateAction<boolean>>;  
 }
 
 export interface ShapesModalProps {

@@ -6,6 +6,8 @@ interface DrawingBoardProps {
   selectedShape: string | null;
   setSelectedShape: (shape: string | null) => void;
   color: string | null;
+
+  socket?: Socket;
 }
 
 export const DrawingBoard: FC<DrawingBoardProps> = ({
@@ -29,6 +31,7 @@ export const DrawingBoard: FC<DrawingBoardProps> = ({
   useEffect(() => {
     const s = io("http://localhost:5000");
     setSocket(s);
+
     return () => {
       s.disconnect();
     };
@@ -54,7 +57,10 @@ export const DrawingBoard: FC<DrawingBoardProps> = ({
         setFigures([]);
       });
     }
-  }, [socket, drawing, figures]);
+    if (socket) {
+      socket.emit("colorSelect", color);
+    }
+  }, [socket, drawing, figures, color]);
 
   useEffect(() => {
     if (socket) {
@@ -186,6 +192,7 @@ export const DrawingBoard: FC<DrawingBoardProps> = ({
           context.stroke();
         }
       });
+      console.log("figures", figures);
     },
     [figures, drawing, selectedColor]
   );
@@ -199,6 +206,7 @@ export const DrawingBoard: FC<DrawingBoardProps> = ({
           points: drawing,
           color: selectedColor || "black",
         };
+
         socket.emit("addFigure", newFigure);
         setFigures([...figures, newFigure]);
 
