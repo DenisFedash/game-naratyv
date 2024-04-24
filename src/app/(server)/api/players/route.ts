@@ -1,16 +1,20 @@
 import { NextResponse } from "next/server";
-import { PlayerData } from "../../../../interfaces/Props.interface"
+import { PlayerData } from "../../../../interfaces/Props.interface";
+import { savePlayersName } from "./data";
+import { getAllPlayersNames } from "./data";
 
-export const savePlayerName = async ({ name, ip_address, device_info }: PlayerData) => {
-  const res = await fetch("/api/players", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ name, ip_address, device_info }),
-  });
-
-  if (res.status === 200) {
-    return NextResponse.json({ success: true })
+export const PUT = async (req) => {
+  try {
+    const players = await savePlayersName(req.body);
+    return NextResponse.json(players);
+  } catch (error) {
+    console.error(error);
+    throw error;
   }
 };
+
+  export const GET = async () => {
+    const players = await getAllPlayersNames();
+    return NextResponse.json(players);
+  };
+

@@ -2,22 +2,26 @@ import { FC } from "react";
 import { GameComponentProps } from "@/interfaces/Props.interface";
 import { pressStart2p } from "@/app/[lang]/fonts";
 import Image from "next/image";
-import data from "../../../public/data/dataGames.json";
 import defaultIcon from "../../../public/icon/team-game.svg";
+import defaultImg from "../../../public/img/naratyv-desc.jpg"
+import { getGame } from "@/app/(server)/api/game/data";
 
-export const GameComponent: FC<GameComponentProps> = ({ lang, id }) => {
-  const rules = data.find((item) => item.id === id);
+const NARATYV = process.env.NEXT_PUBLIC_NARATYV_API
+
+
+export const GameComponent: FC<GameComponentProps> = async ({ lang }) => {
+  const rules = await getGame();
 
   if (!rules) {
-    return <div>Гра не знайдена</div>;
+    return <div>Not Found</div>;
   }
 
   return (
     <div className="layout w-screen">
-          <div key={rules.id} className="flex justify-between pt-24">
+          <div key={rules.uuid} className="flex justify-between pt-24">
           <Image
-            src={rules.img} 
-            alt={lang === "ua" ? rules.nameUa : rules.nameEn} 
+            src={`http://localhost:80/${rules.photo}` || defaultImg} 
+            alt={lang === "ua" ? rules.name_ua : rules.name_en} 
             width={430}
             height={430} 
          className="w-[430px]" />
@@ -32,11 +36,11 @@ export const GameComponent: FC<GameComponentProps> = ({ lang, id }) => {
                 className="mr-7"
               />
               <h2 className={`text-3xl ${pressStart2p.className}`}>
-                {lang === "ua" ? rules.nameUa : rules.nameEn}
+                {lang === "ua" ? rules.name_ua : rules.name_en}
               </h2>
               </div>
             <p className="text-3xl mb-6 text-justify">
-              {lang === "ua" ? rules.descriptionDetailsUa : rules.descriptionDetailsEn}
+              {lang === "ua" ? rules.description_ua : rules.description_en}
             </p>
             <p className="text-3xl text-justify"> {lang === "ua" ? rules.descriptionDetailsTextUa : rules.descriptionDetailsTextEn}</p>
             </div>

@@ -7,21 +7,22 @@ import { SecondBtn } from "../utils/SecondBtn/SecondBtn";
 import { getAllRules } from "@/app/(server)/api/rules/data";
 import { BtnGoBackComponent } from "../utils/BtnGoBack/BtnGoBackComponent";
 
+
 export const RulesAdmin: FC<RulesComponentProps> = async ({ textTr, lang, role }) => {
     const rules = await getAllRules();
     const rulesByRole = rules.filter((item) => item.role === role); 
     if (!rulesByRole.length) {
-      return <div>Правило не знайдено {role}</div>;
+      return <div>Not found {role}</div>;
     }
     
     return (
       <div className="h-full items-center text-center">
         <div className="layout mb-14 mt-24 items-center">
-        <Link href={`/${lang}/create-game`}>
+        {/* <Link href={`/${lang}/team`}>
           <SecondBtn btnWidth="w-[550px]" className="flex items-center mb-24 text-4xl font-bold text-main-grey bg-main-white ml-auto mr-auto">
             {textTr.createGameBtn} 
           </SecondBtn> 
-          </Link>  
+          </Link>   */}
           <h2 className={`text-center text-3xl mb-9 ${pressStart2p.className}`}>
             {textTr.ruleAdminTitle}   
           </h2>
@@ -48,8 +49,7 @@ export const RulesAdmin: FC<RulesComponentProps> = async ({ textTr, lang, role }
               
             </div> 
         ))}
-         <BtnGoBackComponent textTr={textTr} lang={lang} className="w-[466px] mb-24">{textTr.ruleBtnGoBack}</BtnGoBackComponent>
-      
+         <BtnGoBackComponent textTr={textTr} lang={lang} className="w-[466px] mb-24">{textTr.ruleBtnGoBack}</BtnGoBackComponent>  
       </div>
     );
   };

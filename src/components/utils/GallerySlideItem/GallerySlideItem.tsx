@@ -1,6 +1,6 @@
 "use client";
 
-import React, { FC, useEffect} from "react";
+import React, { FC, useEffect, useState} from "react";
 import { GalleryComponentsPropsId } from "@/interfaces/Props.interface";
 import { useLikes } from "../LikesContext/LikesContext";
 import Image from "next/image";
@@ -8,9 +8,25 @@ import Link from "next/link";
 import dataGallery from "../../../../public/data/dataGallery.json";
 import { IconLike } from "../iconLike/iconLike";
 import iconMove from "../../../../public/icon/icon-move.svg";
+import { getGallery } from "@/app/(server)/api/gallery/data";
+
+const NARATYV = process.env.NEXT_PUBLIC_NARATYV_API
 
 export const GallerySlideItem: FC<GalleryComponentsPropsId> = ({ lang }) => {
+  const [gallery, setGallery] = useState([]);
   const { likedItems, setLikedItems } = useLikes();
+
+  useEffect(() => {
+    const fetchGallery = async () => {
+     try {
+       const galleryItems = await getGallery(); 
+       setGallery(galleryItems);
+     } catch (error) {
+       console.log("error fetching gallery:", error)
+     }
+    };
+    fetchGallery();
+   }, []);
 
   useEffect(() => {
     const storedLikes = localStorage.getItem("likedItems");
@@ -27,20 +43,18 @@ export const GallerySlideItem: FC<GalleryComponentsPropsId> = ({ lang }) => {
       : [...likedItems, id];
 
     localStorage.setItem("likedItems", JSON.stringify(updatedLikedItems));
-    setLikedItems(updatedLikedItems);
-  };
+     setLikedItems(updatedLikedItems);
+   };
 
   return ( 
       <ul>
-        {dataGallery
-          .map(
-            ({ id, img, gameNameEn, gameNameUa, teamNameEn, teamNameUa }) => (
+        {gallery.map(({ gallery_uuid, photo, topic, team_name }) => (
               <li
-                key={id}
+                key={gallery_uuid}
                 className="bg-main-white relative rounded-lg border border-main-yellow"
               >
                 <Image
-                  src={img}
+                  src={`http://localhost:80/${photo}`}
                   alt="image-gallery"
                   width={219}
                   height={240}
@@ -48,23 +62,23 @@ export const GallerySlideItem: FC<GalleryComponentsPropsId> = ({ lang }) => {
                 />
                 <div className="px-0 absolute bottom-0 left-0 bg-main-white w-full text-center rounded-b-lg border-t border-t-main-yellow">
                   <h2 className="mb-1 text-xl font-bold">
-                    {lang === "ua" ? gameNameUa : gameNameEn}
+                    {topic}
                   </h2>
                   <p className="text-xl mb-1.5">
-                    {lang === "ua" ? teamNameUa : teamNameEn}
+                    {team_name}
                   </p>
                   <button
-                    onClick={() => handleLike(id)}
+                    onClick={() => handleLike(gallery_uuid)}
                     className="absolute bottom-0 left-0"
                   >
                     <IconLike
                       onLikeClick={handleLike}
-                      id={id}
-                      isLiked={likedItems.includes(id)}
+                      id={gallery_uuid}
+                      isLiked={likedItems.includes(gallery_uuid)}
                     />
                   </button>
                 </div>
-                 <Link href={`/${lang}/gallery/${id}`}> 
+                 <Link href={`/${lang}/gallery/${gallery_uuid}`}> 
                   <div className=" absolute top-0 right-0 bg-icon-move-color p-2 rounded">
                     <Image
                       src={iconMove}
@@ -80,4 +94,3 @@ export const GallerySlideItem: FC<GalleryComponentsPropsId> = ({ lang }) => {
       </ul>
   );
 };
-

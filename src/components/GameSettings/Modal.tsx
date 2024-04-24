@@ -1,15 +1,13 @@
 "use client";
 
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, FC } from "react";
+import { ModalProps } from "@/interfaces/Props.interface";
 
-export const Modal = ({ 
-  isOpenModal, 
-  setIsOpenModal}
-  ) => {
-  const modalRef = useRef();
+export const Modal:FC<ModalProps> = ({ isOpenModal, setIsOpenModal }) => {
+  const modalRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-     const handleClickOutside = (event) => {
+     const handleClickOutside = (event: any) => {
        if (modalRef.current && !modalRef.current.contains(event.target)) {
          setIsOpenModal(false);
        }

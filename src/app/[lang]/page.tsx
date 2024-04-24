@@ -1,5 +1,4 @@
 import { getDictionary } from "./dictionaries";
-import { RulesDetailed } from "@/components/RulesComponent/RulesDetailed ";
 
 
 export default async function Home({
@@ -11,7 +10,6 @@ export default async function Home({
   return (
     <main>
       <h1>Hello</h1>
-      <RulesDetailed textTr={dict.rulesGame} lang={lang}/> 
     </main>
   );
 }

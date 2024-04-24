@@ -9,8 +9,8 @@ export const ListBtn: React.FC<{ setIsOpen: React.Dispatch<React.SetStateAction<
     };
 
     return (
-         <button onClick={handleClick} className="mr-[330px]">
-              <RuleNumber className=" w-16 h-16 bg-main-yellow">
+         <button onClick={handleClick} className="relative">
+              <RuleNumber className="w-16 h-16 bg-main-yellow">
               <Image
               src={listBtn}
               alt="list-button"

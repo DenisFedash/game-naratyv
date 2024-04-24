@@ -11,11 +11,9 @@ import { getAllRules } from "@/app/(server)/api/rules/data";
 import { getAllGallery } from "@/app/(server)/api/gallery/data";
 import defaultImage from "../../../public/img/default-image.png";
 
-
 export const RulesDetailed: FC<TextFCComponentsProps> = async({ textTr, lang, role, id }) => {
   const gallery = await getAllGallery();
   const rules = await getAllRules();
-  console.log(rules)
   const rulesByRole = rules.filter((item) => item.role === role);
   
   if (!rulesByRole.length) {
@@ -29,33 +27,45 @@ export const RulesDetailed: FC<TextFCComponentsProps> = async({ textTr, lang, ro
           {textTr.ruleDetailsTitle}
         </h2>
       </div>
-      {rulesByRole.map((rule, index) => (
-        <>
-          <RuleCard className={`relative w-[1020px] h-36 bg-main-white pl-[82px] text-justify ${index % 2 !== 0 ? "ml-[260px]" : ""}`}>
-            <p className="text-2xl text-justify pr-3">
-              <strong>
-                {lang === "ua" ? rule.rulesUa.rule : rule.rulesEn.rule}
-              </strong>
-              {lang === "ua" ? rule.rulesUa.rule1 : rule.rulesEn.rule1}
-            </p>
-          </RuleCard>
-          <RuleNumber className={`absolute w-16 h-16 mt-[-135px] items-center pl-2 ${index % 2 !== 0 ? "ml-[260px]" : ""}`}>
-            <p className={`text-3xl ${pressStart2p.className}`}>{rule.num}</p>
-          </RuleNumber>
-          {index !== rulesByRole.length - 1 && (
-      <Image
-        src={defaultImage}
-        alt="arrow"
-        width={112}
-        height={94}
-        className={`ml-[1020px] ${index % 2 !== 0 ? "ml-[130px] transform scale-x-[1]" : "transform scale-x-[-1]"}`}
-      />
-    )}
-  </>
-))}
+      <ul>
+        {rulesByRole.map((rule, index) => (
+          <li key={index}>
+            <RuleCard
+              className={`relative w-[1020px] h-36 bg-main-white pl-[82px] text-justify ${
+                index % 2 !== 0 ? "ml-[260px]" : ""
+              }`}
+            >
+              <p className="text-2xl text-justify pr-3">
+                <strong>
+                  {lang === "ua" ? rule.rulesUa.rule : rule.rulesEn.rule}
+                </strong>
+                {lang === "ua" ? rule.rulesUa.rule1 : rule.rulesEn.rule1}
+              </p>
+            </RuleCard>
+            <RuleNumber
+              className={`absolute w-16 h-16 mt-[-135px] items-center pl-2 ${
+                index % 2 !== 0 ? "ml-[260px]" : ""
+              }`}
+            >
+              <p className={`text-3xl ${pressStart2p.className}`}>{rule.num}</p>
+            </RuleNumber>
+            {index !== rulesByRole.length - 1 && (
+              <Image
+                src={defaultImage}
+                alt="arrow"
+                width={112}
+                height={94}
+                className={`ml-[1020px] ${
+                  index % 2 !== 0 ? "ml-[130px] transform scale-x-[1]" : "transform scale-x-[-1]"
+                }`}
+              />
+            )}
+          </li>
+        ))}
+      </ul>
     
-      <div className="text-center mt-28">
-      <Link href={`/${lang}/catalog`}>
+  <div className="text-center mt-28">
+    <Link href={`/${lang}/catalog`}>
       <button className="placeholder:border w-[466px] rounded-lg shadow-3xl h-[84px] ml-auto mr-auto text-3xl font-bold hover:bg-orange bg-main-yellow">{textTr.btnCatalog}</button>
       </Link>
       <h2 className={`text-3xl mt-28 mb-12 ${pressStart2p.className}`}>

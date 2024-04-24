@@ -13,27 +13,27 @@ export const CreateMeet = () => {
   useEffect(() => {
     gapi.load("client", initializeGapiClient);
     tokenClient = google.accounts.oauth2.initTokenClient({
-      client_id: process.env.CLIENT_ID,
-      scope: process.env.SCOPES,
+      client_id: '125732986586-cmqkof1edphb0ut5bd35v1bcovm2hcgt.apps.googleusercontent.com',
+      scope: 'https://www.googleapis.com/auth/calendar',
       callback: "", 
     });
     gisInited = true;
   }, []);
 
-  async function initializeGapiClient() {
-    await gapi.client.init({
-      apiKey: process.env.API_KEY,
-      discoveryDocs: [process.env.DISCOVERY_DOC],
+   function initializeGapiClient() {
+    gapi.client.init({
+      apiKey: 'AIzaSyBG_Z3V7ZCRwyNJms1gVzDJcH2TCUSoHVc',
+      discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest'],
     });
     gapiInited = true;
   }
 
-  async function createGoogleMeetEvent() {
+   function createGoogleMeetEvent() {
     if (!gisInited) {
       console.error("Token client is not initialized");
       return;
     }
-    tokenClient.callback = async (resp: any) => {
+    tokenClient.callback = (resp: any) => {
       if (resp.error !== undefined) {
         throw resp;
       }
@@ -43,7 +43,7 @@ export const CreateMeet = () => {
         start: new Date().toISOString(),
         end: new Date(Date.now() + 3600000).toISOString(), 
       };
-      const link = await scheduleEvent(eventDetails);
+      const link = scheduleEvent(eventDetails);
       setEventLink(link);
     };
     if (gapi.client.getToken() === null) {
@@ -53,7 +53,7 @@ export const CreateMeet = () => {
     }
   }
 
-  async function scheduleEvent(eventDetails: any) {
+ function scheduleEvent(eventDetails: any) {
     const event = {
       summary: eventDetails.summary,
       description: eventDetails.description,
@@ -79,7 +79,7 @@ export const CreateMeet = () => {
       resource: event,
       conferenceDataVersion: 1,
     });
-    const response = await request.execute();
+    const response =  request.execute();
     if (response && response.hangoutLink) {
       return response.hangoutLink;
     } else {

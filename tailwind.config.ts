@@ -16,7 +16,6 @@ const config: Config = {
   theme: {
     colors: {
       "main-background": "#f7f6f2",
-     
       "main-white": "#fefefe",
       "main-grey": "#dadada",
       "main-yellow": "#f7d062",
@@ -29,8 +28,12 @@ const config: Config = {
       "icon-move-color": "#F7EAC6",
       "error-color": "#ff0000",
       "card-bg": "#F7F6F2",
+      "modal-bg": "rgba(0, 0, 0, 0.2)",
+      "radio-btn-bg": "#1C1B1F",
       "main-font-color": "#141515",
-      "second-font-color": "#fd8d3b",   
+      "second-font-color": "#fd8d3b",
+      "grey-font-color": "#5B5B5B",
+      "input-active-color": "#B2E4F4",   
     },
     screens: {
       sm: "390px",

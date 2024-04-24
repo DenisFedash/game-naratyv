@@ -1,40 +1,43 @@
-// "use client";
+ "use client";
 
-import { FC } from "react";
+import { useState, FC } from "react";
 import { RulesBtnProps } from "@/interfaces/Props.interface";
-// import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { SecondBtn } from "../utils/SecondBtn/SecondBtn";
-import { RulesDetailed } from "./RulesDetailed ";
+import { NumberOfTeams } from "./RadioBtnNumberOfTeams";
+import { useTeamsStore } from "./TeamsContext";
 
 
-export const BtnComponent: FC<RulesBtnProps> = async ({ textTr, lang, id }) =>  {
-  // const router = useRouter();
+export const BtnComponent: FC<RulesBtnProps> = ({ textTr, lang, id }) =>  {
+  const [isOpen, setIsOpen] = useState(false);
+  const { selectedValue, setSelectedValue } = useTeamsStore();
 
-  // const handleButtonClick = (path) => {
-  //   router.push(path);
-  // };
+
+  const toggleForm = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
     <>
-      <div className="flex layout justify-between mt-20">
+      <div className="relative flex layout justify-between mt-20">
         <Link href={`/${lang}/rules/naratyv-creatyv/player`}>
-        <button className="border w-[343px] rounded-lg shadow-3xl h-[84px] text-center text-3xl font-bold bg-main-white hover:bg-orange">
-          {textTr.rulesBtnUser}
-        </button>
+          <button className="border w-[343px] rounded-lg shadow-3xl h-[84px] text-center text-3xl font-bold bg-main-white hover:bg-orange">
+            {textTr.rulesBtnUser}
+          </button>
         </Link>
         <Link href={`/${lang}/rules/naratyv-creatyv/admin`}>
-        <button className="border w-[343px] rounded-lg shadow-3xl h-[84px] text-center text-3xl bg-main-white font-bold hover:bg-orange">
-          {textTr.rulesBtnAdmin}
-        </button>
-        </Link>
-        <Link href={`/${lang}/create-game`}>
-        <SecondBtn className="bg-main-white">
+          <button className="border w-[343px] rounded-lg shadow-3xl h-[84px] text-center text-3xl bg-main-white font-bold hover:bg-orange">
+            {textTr.rulesBtnAdmin}
+          </button>
+         </Link>
+          <div  onClick={toggleForm}>
+        <SecondBtn    
+        className="relative bg-main-white cursor-pointer">
           {textTr.createGameBtn}
         </SecondBtn>
-        </Link>
+        </div>
       </div>
-      <RulesDetailed textTr={textTr} lang={lang} role={"details"} /> 
+      {isOpen && <NumberOfTeams selectedValue={selectedValue} setSelectedValue={setSelectedValue} />}
     </>
   );
 };

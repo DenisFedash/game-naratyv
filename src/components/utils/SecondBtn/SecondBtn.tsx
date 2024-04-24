@@ -3,9 +3,9 @@ import iconClick from "../../../../public/icon/icon-click.svg";
 import { FC } from "react";
 import { BtnProps } from "@/interfaces/Props.interface";
 
-export const SecondBtn: FC<BtnProps> = ({ children, text, className }) => {
+export const SecondBtn: FC<BtnProps> = ({ children, text, className, onClick }) => {
   return (
-    <div className={`border border-main-font-color rounded-lg shadow-3xl font-bold flex items-center max-w-[263px] md:max-w-[466px] hover:bg-orange focus:outline-none transform transition-transform duration-200 ease-in-out active:scale-90 ${className}`}>
+    <div  onClick={onClick} className={`border border-main-font-color rounded-lg shadow-3xl font-bold flex items-center max-w-[263px] md:max-w-[466px] hover:bg-orange focus:outline-none transform transition-transform duration-200 ease-in-out active:scale-90 ${className}`}>
       <div className="w-[382px] border-r-2 border-gray-300">
         <p className="text-base md:text-3xl font-bold text-center p-2.5 md:py-5">
         {children || text}

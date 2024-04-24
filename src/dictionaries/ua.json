@@ -1,4 +1,29 @@
 {
+    "header":{
+        "headerAbout": "Про нас",
+        "headerCatalog": "Каталог",
+        "headerMain": "Головна",
+        "headerContacts": "Контакти",
+        "headerPartner": "Стати партнером",
+        "headerConnect": "Зв’язатися з нами",
+        "headerPrivacy": "Політика конфіденційності",
+        "headerConditions": "Умови участі",
+        "headerRights": "Розробка Junfolio 2023. Всі права захищено"
+    },
+
+"footer":{
+    "footerTitle": "Футер",
+    "footerMain": "Головна",
+    "footerAbout": "Про нас",
+    "footerCatalog": "Каталог",
+    "footerContacts": "Контакти",
+    "footerPartner": "Стати партнером",
+    "footerConnect": "Зв’язатися з нами",
+    "footerPrivacy": "Політика конфіденційності",
+    "footerConditions": "Умови участі",
+    "footerRights": "Розробка Junfolio 2023. Всі права захищено"
+},
+
     "contacts":{
         "contactsTitle": "Контакти",
         "contactsName": "Імʼя*",

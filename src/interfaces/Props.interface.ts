@@ -1,7 +1,7 @@
 
-import { Dispatch, SetStateAction, ReactNode } from "react";
+import { Dispatch, SetStateAction, ReactNode, MutableRefObject } from "react";
 
-import { GameData, SORT_OPTIONS } from "@/api/games/gamesApi";
+import { GameData, SORT_OPTIONS } from "@/app/(server)/api/catalog/gamesApi"; 
 
 
 export interface TextFCComponentsProps {
@@ -186,22 +186,31 @@ export interface GameComponentProps {
 
 export interface GameTopicProps {
   lang?: string;
-  textTr: {
+  textTr?: {
     [key: string]: any;
   };
   isOpen: boolean; 
   onTopicSelect: (topic: string) => void;
+  ref: MutableRefObject<null>;
   id?: string;
-  newTopic: string,
-  topic: string
+  newTopic?: string,
+  topic?: string
+}
+
+export interface GameTopicListProps {
+  gameTopics: string [];
+  addGameTopic: (newTopic: string) => void;
+  onTopicClick: (topic: string) => void;
+}
+
+export interface ModalProps {
+  ref?: MutableRefObject<null>;
+  isOpenModal: boolean;
+  setIsOpenModal: Dispatch<SetStateAction<boolean>>
 }
 
 export interface PlayerData {
-  name: string;
-  ip_address: string;
-  device_info: {
-    [key: string]: any;
-  }
+  username: string; 
 }
 
 export interface GameTopicComponentProps {
@@ -209,4 +218,9 @@ export interface GameTopicComponentProps {
   addGameTopic: (newTopic: string) => void;
   onTopicClick: (topic: string) => void;
   maxLength: number;
+}
+
+export interface NumberOfTeamProps {
+  lang: string;
+  sessionIdentificator: string;
 }
