@@ -52,7 +52,7 @@ export const GameSettings:FC<GameTopicProps> = ({textTr, lang, id }) => {
   };
     
   const handleCopy = () => {
-    navigator.clipboard.writeText(`http://localhost:80/ua/game-start/naratyv-creatyv/player?sessionIdentificator=${sessionIdentificator}`);
+    navigator.clipboard.writeText(`http://localhost:3000/ua/game-start/naratyv-creatyv/player?sessionIdentificator=${sessionIdentificator}`);
   };
 
 

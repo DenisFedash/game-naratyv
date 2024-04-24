@@ -20,7 +20,7 @@ export const GameComponent: FC<GameComponentProps> = async ({ lang }) => {
     <div className="layout w-screen">
           <div key={rules.uuid} className="flex justify-between pt-24">
           <Image
-            src={`http://localhost:80/api/v1//${rules.photo}` || defaultImg} 
+            src={`http://localhost:80/api/v1/${rules.photo}` || defaultImg} 
             alt={lang === "ua" ? rules.name_ua : rules.name_en} 
             width={430}
             height={430} 
