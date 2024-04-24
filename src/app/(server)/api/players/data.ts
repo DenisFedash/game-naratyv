@@ -8,7 +8,7 @@ export const savePlayersName = async ({ username }: PlayerData) => {
   try {
     const data = new URLSearchParams();
     data.append("username", username);
-    const response = await fetch("http://localhost:80/player/", {
+    const response = await fetch("http://localhost:80/api/v1/player/", {
       method: "PUT",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
@@ -33,7 +33,7 @@ export const savePlayersName = async ({ username }: PlayerData) => {
 
   export const getAllPlayersNames = async () => {
     try {
-      const response = await fetch("http://localhost:80/player/", {
+      const response = await fetch("http://localhost:80/api/v1/player/", {
         method: "GET",
       });
       if (!response.ok) {

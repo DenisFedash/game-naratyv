@@ -6,7 +6,7 @@ export const getGame = async () => {
     const uuid = "af2ea118-abd1-434d-848c-dd578979c5b9";
     try {
       const response = await fetch(
-       `http://localhost:80/game_info/${uuid}`, {
+       `http://localhost:80/api/v1/game_info/${uuid}`, {
         method: "GET",
        });
       if (!response.ok) {

@@ -5,7 +5,7 @@ export const getGalleryItem = async (gallery_uuid) => {
   // const gallery_uuid = "fc40c7ac-3420-4b46-982e-aaac5fde0e94";
     try {
       const response = await fetch(
-       `http://localhost:80/gallery/item/${gallery_uuid}`, {
+       `http://localhost:80/api/v1/gallery/item/${gallery_uuid}`, {
         method: "GET",
        });
       if (!response.ok) {

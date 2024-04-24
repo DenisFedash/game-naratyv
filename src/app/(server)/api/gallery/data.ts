@@ -15,7 +15,7 @@ import data from "../../../../../public/data/dataGallery.json";
     const game_uuid = "af2ea118-abd1-434d-848c-dd578979c5b9";
     try {
       const response = await fetch(
-       `http://localhost:80/gallery/${game_uuid}`, {
+       `http://localhost:80/api/v1/gallery/${game_uuid}`, {
         method: "GET",
        });
       if (!response.ok) {
@@ -50,7 +50,7 @@ import data from "../../../../../public/data/dataGallery.json";
       formData.append("team_name", team_name);
       formData.append("game_uuid", game_uuid);
 
-      const response = await fetch( `http://localhost:80/gallery/${game_uuid}`, {
+      const response = await fetch( `http://localhost:80/api/v1/gallery/${game_uuid}`, {
         method: "POST",
         body: formData
       });

@@ -49,7 +49,7 @@ export const GalleryItem: FC<GalleryComponentsPropsId> = ({
           </p>
           <div className="flex justify-center bg-main-white mb-9">
             <Image
-              src={`http://localhost:80/${oneGallery.photo}`}
+              src={`http://localhost:80/api/v1/${oneGallery.photo}`}
               alt="main-img"
               width={1280}
               height={485}

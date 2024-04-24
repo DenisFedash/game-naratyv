@@ -21,7 +21,7 @@ export const postGameSession = async (
     }
 
     const response = await fetch(
-      "http://localhost:80/game_session/", {
+      "http://localhost:80/api/v1/game_session/", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
@@ -46,7 +46,7 @@ export const addPlayersInGame = async (session_identificator) => {
     const data = new URLSearchParams();
     data.append("session_identificator", session_identificator);
     const response = await fetch(
-      `http://localhost:80/game_session/${session_identificator}`, {
+      `http://localhost:80/api/v1/game_session/${session_identificator}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
@@ -72,7 +72,7 @@ export const addPlayersInGame = async (session_identificator) => {
 export const getGameSession = async (sessionIdentificator) => {
   try {
     const response = await fetch(
-     `http://localhost:80/game_session/${sessionIdentificator}`, {
+     `http://localhost:80/api/v1/game_session/${sessionIdentificator}`, {
       method: "GET",
      });
     const responseData = await response.json();

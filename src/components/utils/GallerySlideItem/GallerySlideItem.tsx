@@ -54,7 +54,7 @@ export const GallerySlideItem: FC<GalleryComponentsPropsId> = ({ lang }) => {
                 className="bg-main-white relative rounded-lg border border-main-yellow"
               >
                 <Image
-                  src={`http://localhost:80/${photo}`}
+                  src={`http://localhost:80/api/v1/${photo}`}
                   alt="image-gallery"
                   width={219}
                   height={240}

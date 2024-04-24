@@ -4,7 +4,7 @@
 export const getGameCatalog = async () => {
     try {
       const response = await fetch(
-        "http://localhost:80/game_info/all", {
+        "http://localhost:80/api/v1/game_info/all", {
         method: "GET",
        });
       if (!response.ok) {
