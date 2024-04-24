@@ -9,7 +9,7 @@ const nextConfig = {
           pathname: "/dq2k7fjmw/**",
         },
       ],
-      domains: ['api-backend.naratyv-creative.fun'],
+      // domains: ['api-backend.naratyv-creative.fun'],
     },
   };
   
