@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import dataTeam from "../../../public/data/teamPlayers.json";
 import Image from "next/image";
 import { pressStart2p } from "@/app/[lang]/fonts";
@@ -15,13 +15,104 @@ import { DrawingBoard } from "../FigurePicker/FigurePicker";
 import { Canvas } from "../Canva/Canva";
 import { ColorPicker } from "../ColorPicker/ColorPicker";
 import { BgColorPicker } from "../ColorPicker/BgColorPicker";
+import io, { Socket } from "socket.io-client";
 
 export const FieldGame = () => {
   const [isOpenColor, setIsOpenColor] = useState(false);
   const [isOpenBgColor, setIsOpenBgColor] = useState(false);
-
   const [isOpenFigure, setIsOpenFigure] = useState(false);
   const [drawingData, setDrawingData] = useState<any>(null);
+  const [eraserMode, setEraserMode] = useState(false);
+  const [timer, setTimer] = useState(120);
+  const [socket, setSocket] = useState<Socket | undefined>(undefined);
+  const [timerRunning, setTimerRunning] = useState(false);
+
+  useEffect(() => {
+    const s = io("http://localhost:5000");
+    setSocket(s);
+
+    return () => {
+      s.disconnect();
+    };
+  }, []);
+
+  // useEffect(() => {
+  //   let interval;
+  //   if (timerRunning && timer > 0) {
+  //     interval = setInterval(() => {
+  //       setTimer((prevTimer) => {
+  //         if (prevTimer > 0) {
+  //           return prevTimer - 1;
+  //         } else {
+  //           stopTimer(); // Остановка таймера, если время истекло
+  //           return 0;
+  //         }
+  //       });
+  //     }, 1000);
+  //   } else if (timer === 0) {
+  //     stopTimer();
+  //   }
+  //   return () => clearInterval(interval); // Очистка интервала при размонтировании компонента или остановке таймера
+  // }, [timerRunning, timer]);
+
+  const handleTimerClick = () => {
+    if (!timerRunning) {
+      startTimer();
+    }
+  };
+
+  const toggleEraserMode = () => {
+    setEraserMode(!eraserMode);
+  };
+
+  const startTimer = () => {
+    setTimerRunning(true);
+    if (socket) {
+      socket.emit("start-timer");
+    }
+  };
+
+  const stopTimer = () => {
+    setTimerRunning(false);
+  };
+
+  useEffect(() => {
+    if (socket) {
+      socket.on("timer-update", (updatedTimer) => {
+        setTimer(updatedTimer);
+      });
+    }
+    return () => {
+      if (socket) {
+        socket.off("timer-update");
+      }
+    };
+  }, [socket]);
+
+  const formatTime = (timeInSeconds) => {
+    const minutes = Math.floor(timeInSeconds / 60);
+    const seconds = timeInSeconds % 60;
+    return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(
+      2,
+      "0"
+    )}`;
+  };
+
+  useEffect(() => {
+    if (socket) {
+      socket.on("timer-update", (updatedTimer) => {
+        setTimer(updatedTimer);
+        if (updatedTimer === 0) {
+          stopTimer(); // Остановка таймера, если время истекло
+        }
+      });
+    }
+    return () => {
+      if (socket) {
+        socket.off("timer-update");
+      }
+    };
+  }, [socket]);
 
   const handleDrawingUpdate = (updatedDrawingData: any) => {
     setDrawingData(updatedDrawingData);
@@ -30,7 +121,6 @@ export const FieldGame = () => {
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
   const [selectedBgColor, setSelectedBgColor] = useState<string | null>(null);
   const [selectedShape, setSelectedShape] = useState<string | null>(null);
-  console.log("selectedBgColor", selectedBgColor);
 
   const handleColorSelect = (color: string) => {
     setSelectedColor(color);
@@ -68,7 +158,12 @@ export const FieldGame = () => {
       </h1>
       <p className="text-3xl text-center mb-6 ">Назва гри</p>
       <div className="flex items-center">
-        <div className="w-[89px] h-[520px] bg-dark-grey rounded-lg py-5 px-[20.5px] mr-4">
+        <div
+          className="w-[89px] h-[520px] bg-dark-grey rounded-lg py-5 px-[20.5px] mr-4"
+          onClick={() => {
+            toggleEraserMode();
+          }}
+        >
           <Image
             src={iconBrash}
             alt="brash"
@@ -179,7 +274,12 @@ export const FieldGame = () => {
               />
             </div>
             <div className="py-1.5 pr-4">
-              <div className="text-5xl text-dark-grey">00:00</div>
+              <div
+                className="text-5xl text-dark-grey"
+                onClick={handleTimerClick}
+              >
+                {formatTime(timer)}
+              </div>
             </div>
           </div>
           <div>
@@ -195,6 +295,8 @@ export const FieldGame = () => {
               color={selectedColor}
               selectedBgColor={selectedBgColor}
               setSelectedBgColor={setSelectedBgColor}
+              eraserMode={eraserMode}
+              setEraserMode={setEraserMode}
             />
           </div>
         </div>

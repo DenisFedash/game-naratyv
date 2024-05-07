@@ -5,21 +5,19 @@ interface CanvasProps {
   color: string | null;
   selectedBgColor: string | null;
   setSelectedBgColor: (color: string) => void;
+  eraserMode: boolean;
+  setEraserMode: (eraserMode: boolean) => void;
 }
 
 export const Canvas: FC<CanvasProps> = ({
   color,
   selectedBgColor,
   setSelectedBgColor,
+  eraserMode,
+  setEraserMode,
 }) => {
   const [socket, setSocket] = useState<Socket | undefined>(undefined);
   const [imageData, setImageData] = useState<string | null>(null);
-  const [eraserMode, setEraserMode] = useState(false);
-  const [eraserStartPoint, setEraserStartPoint] = useState<{
-    x: number;
-    y: number;
-  } | null>(null);
-  console.log("selectedBgColor", selectedBgColor);
 
   useEffect(() => {
     const s = io("http://localhost:5000");
@@ -69,6 +67,24 @@ export const Canvas: FC<CanvasProps> = ({
     }
   }, [socket, imageData]);
 
+  useEffect(() => {
+    if (socket) {
+      console.log("Отправка режима ластика:", eraserMode);
+      socket.emit("eraser-mode", eraserMode); // Отправка состояния режима ластика на сервер
+    }
+  }, [eraserMode, socket]);
+
+  useEffect(() => {
+    if (socket) {
+      // Слушаем изменения состояния режима ластика с сервера
+      socket.on("eraser-mode", (mode) => {
+        console.log("Состояние режима ластика получено:", mode);
+        // Обновляем локальное состояние полученным состоянием режима ластика
+        setEraserMode(mode);
+      });
+    }
+  }, [setEraserMode, socket]);
+
   const drawImageOnCanvas = (data: string) => {
     const canvas = document.querySelector<HTMLCanvasElement>("#board");
     if (!canvas) return;
@@ -97,6 +113,12 @@ export const Canvas: FC<CanvasProps> = ({
     ctx.beginPath();
     ctx.moveTo(offsetX, offsetY);
 
+    if (eraserMode) {
+      ctx.globalCompositeOperation = "destination-out";
+    } else {
+      ctx.globalCompositeOperation = "source-over";
+    }
+
     const handleCanvasMouseMove = (event: MouseEvent) => {
       const offsetX = event.clientX - rect.left;
       const offsetY = event.clientY - rect.top;
@@ -111,12 +133,14 @@ export const Canvas: FC<CanvasProps> = ({
       canvas.removeEventListener("mousemove", handleCanvasMouseMove);
       canvas.removeEventListener("mouseup", handleCanvasMouseUp);
 
-      const base64ImageData = canvas.toDataURL("image/png");
-      setImageData(base64ImageData);
+      if (!eraserMode) {
+        const base64ImageData = canvas.toDataURL("image/png");
+        setImageData(base64ImageData);
 
-      // Send the updated canvas data to the server
-      if (socket) {
-        socket.emit("canvas-data", base64ImageData);
+        // Send the updated canvas data to the server
+        if (socket) {
+          socket.emit("canvas-data", base64ImageData);
+        }
       }
     };
 

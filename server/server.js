@@ -1,3 +1,4 @@
+const http = require("http");
 const port = process.env.PORT || 5000;
 const io = require("socket.io")(port, {
   cors: {
@@ -5,6 +6,9 @@ const io = require("socket.io")(port, {
     methods: ["GET", "POST"],
   },
 });
+
+const server = http.createServer();
+io.attach(server);
 
 let figures = [];
 let drawing = [];
@@ -37,6 +41,8 @@ let drawing = [];
 
 let currentCanvasData;
 let currentBackgroundColor;
+let eraserMode = false;
+let timerInterval;
 
 io.on("connection", (socket) => {
   console.log("New client connected");
@@ -46,8 +52,14 @@ io.on("connection", (socket) => {
   }
 
   if (currentBackgroundColor) {
-    socket.emit("background-color", currentBackgroundColor); // Надсилаємо колір бекграунду при підключенні
+    socket.emit("background-color", currentBackgroundColor);
   }
+
+  if (timerInterval) {
+    socket.emit("timer-update", timerInterval / 1000);
+  }
+
+  // socket.emit("eraser-mode", eraserMode);
 
   socket.on("canvas-data", (data) => {
     currentCanvasData = data;
@@ -59,9 +71,33 @@ io.on("connection", (socket) => {
       socket.emit("canvas-data", currentCanvasData);
     }
   });
+
   socket.on("background-color", (color) => {
-    currentBackgroundColor = color; // Зберігаємо новий колір бекграунду
+    currentBackgroundColor = color;
     io.emit("background-color", color);
+  });
+
+  // Обработчик изменения режима ластика
+  // socket.on("eraser-mode", (mode) => {
+  //   console.log("Eraser mode received:", mode);
+  //   eraserMode = mode;
+  //   // Отправляем состояние режима ластика всем подключенным клиентам
+  //   io.emit("eraser-mode", mode);
+  // });
+
+  socket.on("start-timer", () => {
+    if (!timerInterval) {
+      let timer = 120; // Время в секундах
+      timerInterval = setInterval(() => {
+        if (timer > 0) {
+          timer -= 1;
+          io.emit("timer-update", timer); // Отправка обновленного времени всем клиентам
+        } else {
+          clearInterval(timerInterval);
+          timerInterval = null;
+        }
+      }, 1000);
+    }
   });
 
   socket.on("disconnect", () => {

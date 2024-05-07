@@ -17,7 +17,6 @@ export const BgColorPicker: FC<BgColorProps> = ({
   setIsOpenBgColor,
 }) => {
   const [selectedBgColor, setSelectedBgColor] = useState<string>("");
-  console.log("bgcolor", selectedBgColor);
 
   const handleColorClick = (color: string) => {
     setSelectedBgColor(color);

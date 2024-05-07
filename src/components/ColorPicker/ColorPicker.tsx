@@ -17,7 +17,6 @@ export const ColorPicker: FC<ColorProps> = ({
   setIsOpenColor,
 }) => {
   const [selectedColor, setSelectedColor] = useState<string>("");
-  console.log("Color", selectedColor);
 
   const handleColorClick = (color: string) => {
     setSelectedColor(color);
