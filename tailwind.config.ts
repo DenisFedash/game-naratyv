@@ -42,7 +42,8 @@ const config: Config = {
     extend: {
       boxShadow: {
         '3xl': '-3px 4px 0px 0px #000',
-        'team-shadow': '-10px 10px 0px 0px #FFC727;'
+        'team-shadow': '-10px 10px 0px 0px #FFC727;',
+        'panel-shadow': '0px 4px 4px 0px #FD8D3B;'
       },
       backgroundImage: {
          "gradient-card": "linear-gradient(180deg, #DEC9EA 0%, rgba(255, 245, 0, 0.00) 100%)",

@@ -1,0 +1,32 @@
+[
+    {
+        "id": "1",
+        "name": "Denis",
+        "icon": "/icons/team-players/1.svg"
+    },
+     {
+        "id": "2",
+        "name": "Denis",
+        "icon": "/icons/team-players/2.svg"
+    },
+     {
+        "id": "3",
+        "name": "Denis",
+        "icon": "/icons/team-players/3.svg"
+    },
+     {
+        "id": "4",
+        "name": "Denis",
+        "icon": "/icons/team-players/4.svg"
+    },
+     {
+        "id": "5",
+        "name": "Denis",
+        "icon": "/icons/team-players/5.svg"
+    },
+     {
+        "id": "6",
+        "name": "Denis",
+        "icon": "/icons/team-players/6.svg"
+    }
+]
