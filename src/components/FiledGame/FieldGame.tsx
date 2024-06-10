@@ -16,6 +16,8 @@ import { Canvas } from "../Canva/Canva";
 import { ColorPicker } from "../ColorPicker/ColorPicker";
 import { BgColorPicker } from "../ColorPicker/BgColorPicker";
 import io, { Socket } from "socket.io-client";
+import iconPencil from "../../../public/icons/icon-pencil.svg";
+import iconEraser from "../../../public/icons/icon-ersaer.svg";
 
 export const FieldGame = () => {
   const [isOpenColor, setIsOpenColor] = useState(false);
@@ -26,6 +28,11 @@ export const FieldGame = () => {
   const [timer, setTimer] = useState(120);
   const [socket, setSocket] = useState<Socket | undefined>(undefined);
   const [timerRunning, setTimerRunning] = useState(false);
+  const [drawingMode, setDrawingMode] = useState("pencil");
+
+  const toggleDrawingMode = () => {
+    setDrawingMode(drawingMode === "pencil" ? "eraser" : "pencil");
+  };
 
   useEffect(() => {
     const s = io("http://localhost:5000");
@@ -63,6 +70,7 @@ export const FieldGame = () => {
 
   const toggleEraserMode = () => {
     setEraserMode(!eraserMode);
+    setDrawingMode(drawingMode === "pencil" ? "eraser" : "pencil");
   };
 
   const startTimer = () => {
@@ -89,7 +97,7 @@ export const FieldGame = () => {
     };
   }, [socket]);
 
-  const formatTime = (timeInSeconds) => {
+  const formatTime = (timeInSeconds: number) => {
     const minutes = Math.floor(timeInSeconds / 60);
     const seconds = timeInSeconds % 60;
     return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(
@@ -103,7 +111,7 @@ export const FieldGame = () => {
       socket.on("timer-update", (updatedTimer) => {
         setTimer(updatedTimer);
         if (updatedTimer === 0) {
-          stopTimer(); // Остановка таймера, если время истекло
+          stopTimer();
         }
       });
     }
@@ -135,7 +143,15 @@ export const FieldGame = () => {
   };
 
   return (
-    <div className="layout">
+    <div
+      className="layout"
+      // style={{
+      //   cursor:
+      //     drawingMode === "pencil"
+      //       ? "url('../../../icons/icon-pencil.svg'), auto"
+      //       : "url('../../../icons/icon-ersaer.svg'), auto",
+      // }}
+    >
       {/* <ul className="flex items-center justify-end my-11">
         {dataTeam.map(({ id, name, icon }, index) => (
           <li

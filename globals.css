@@ -75,3 +75,12 @@ main::-webkit-scrollbar {
   }
 }
 
+.canvas-pencil {
+  cursor: url('/public//icons/icon-pencil.svg'), auto;
+}
+
+/* Приклад стилів для курсора стирачки */
+.canvas-eraser {
+  cursor: url('/public/icons/icon-ersaer.svg'), auto;
+}
+
