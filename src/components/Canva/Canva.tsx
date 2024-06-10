@@ -18,6 +18,7 @@ export const Canvas: FC<CanvasProps> = ({
 }) => {
   const [socket, setSocket] = useState<Socket | undefined>(undefined);
   const [imageData, setImageData] = useState<string | null>(null);
+  const [drawingMode, setDrawingMode] = useState(true);
 
   useEffect(() => {
     const s = io("http://localhost:5000");
@@ -76,10 +77,8 @@ export const Canvas: FC<CanvasProps> = ({
 
   useEffect(() => {
     if (socket) {
-      // Слушаем изменения состояния режима ластика с сервера
       socket.on("eraser-mode", (mode) => {
         console.log("Состояние режима ластика получено:", mode);
-        // Обновляем локальное состояние полученным состоянием режима ластика
         setEraserMode(mode);
       });
     }
@@ -113,35 +112,40 @@ export const Canvas: FC<CanvasProps> = ({
     ctx.beginPath();
     ctx.moveTo(offsetX, offsetY);
 
-    if (eraserMode) {
-      ctx.globalCompositeOperation = "destination-out";
-    } else {
-      ctx.globalCompositeOperation = "source-over";
-    }
-
     const handleCanvasMouseMove = (event: MouseEvent) => {
       const offsetX = event.clientX - rect.left;
       const offsetY = event.clientY - rect.top;
 
       ctx.lineTo(offsetX, offsetY);
-      ctx.strokeStyle = color || "black";
-      ctx.lineWidth = 2;
+
       ctx.stroke();
+
+      if (eraserMode) {
+        ctx.globalCompositeOperation = "source-over"; // Встановлюємо нормальний режим малювання
+        ctx.strokeStyle = selectedBgColor || "#ffffff"; // Колір видалення, наприклад, колір фону або білий
+        ctx.lineWidth = 4; // Ширина лінії видалення
+        const base64ImageData = canvas.toDataURL("image/png");
+        setImageData(base64ImageData);
+        if (socket) {
+          socket.emit("canvas-data", base64ImageData);
+        }
+      } else {
+        ctx.globalCompositeOperation = "source-over";
+        ctx.strokeStyle = color || "black";
+        ctx.lineWidth = 1;
+        const base64ImageData = canvas.toDataURL("image/png");
+        setImageData(base64ImageData);
+        if (socket) {
+          socket.emit("canvas-data", base64ImageData);
+        }
+      }
     };
 
     const handleCanvasMouseUp = () => {
       canvas.removeEventListener("mousemove", handleCanvasMouseMove);
       canvas.removeEventListener("mouseup", handleCanvasMouseUp);
-
-      if (!eraserMode) {
-        const base64ImageData = canvas.toDataURL("image/png");
-        setImageData(base64ImageData);
-
-        // Send the updated canvas data to the server
-        if (socket) {
-          socket.emit("canvas-data", base64ImageData);
-        }
-      }
+      setEraserMode(false);
+      // Update imageData and send to the server after finishing drawing
     };
 
     canvas.addEventListener("mousemove", handleCanvasMouseMove);
