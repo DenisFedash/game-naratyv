@@ -6,33 +6,49 @@ import { LikesProvider } from "@/components/utils/LikesContext/LikesContext";
 import { Header } from "@/components/Header/Header";
 import { Footer } from "@/components/Footer/Footer";
 
-
 export const metadata: Metadata = {
-  title: "Naratyv-Creatyv",
-  description: "Team-game Naratyv-Creatyv",
+	title: "Naratyv-Creatyv",
+	description: "Team-game Naratyv-Creatyv",
 };
 
 export default async function RootLayout({
-  children,
-  params: { lang },
+	children,
+	params: { lang },
 }: {
-  children: React.ReactNode;
-  params: { lang: string };
+	children: React.ReactNode;
+	params: { lang: string };
 }) {
-  const dict = await getDictionary(lang);
-  return (
-    <html lang={lang}>
-      <head />
-      <body className={openSansHebrew.className}>
-         <LikesProvider>
-          <Header textTr={dict.header} lang={lang} />
-          {children}
-          <Footer textTr={dict.footer} lang={lang} />
-          </LikesProvider>
-        <script async defer src="https://apis.google.com/js/api.js" onLoad="gapiLoaded()"></script>
-    <script async defer src="https://accounts.google.com/gsi/client" onLoad="gisLoaded()"></script>
-    <script type="text/javascript" src="./assets/scripts/googleEvent.js"></script> 
-      </body>
-    </html>
-  );
+	const dict = await getDictionary(lang);
+	return (
+		<html lang={lang}>
+			<head />
+			<body className={`${openSansHebrew.className} flex flex-col`}>
+				<LikesProvider>
+					<Header textTr={dict.header} lang={lang} />
+
+					<main className="flex-auto flex flex-col items-center justify-center">
+						{children}
+					</main>
+
+					<Footer textTr={dict.footer} lang={lang} />
+				</LikesProvider>
+				<script
+					async
+					defer
+					src="https://apis.google.com/js/api.js"
+					onLoad="gapiLoaded()"
+				></script>
+				<script
+					async
+					defer
+					src="https://accounts.google.com/gsi/client"
+					onLoad="gisLoaded()"
+				></script>
+				<script
+					type="text/javascript"
+					src="./assets/scripts/googleEvent.js"
+				></script>
+			</body>
+		</html>
+	);
 }

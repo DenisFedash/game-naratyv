@@ -10,18 +10,18 @@ import { usePathname } from "next/navigation";
 import { Logo } from "../utils/Logo/Logo";
 
 export const Footer: FC<TextHeaderProps> = ({ textTr, lang }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const pathName = usePathname();
-  const path = pathName.slice(4);
-  return (
-    <div className="bg-main-yellow pt-4 md:pt-6 ">
-      <div className="layout">
-        <div className=" lg:flex lg:justify-between pb-6 relative">
-          <div className="">
-            <div className="mb-4 md:mb-6">
-              <Logo lang={lang} setIsOpen={setIsOpen} />
-            </div>
-            {/* <Link
+	const [isOpen, setIsOpen] = useState(false);
+	const pathName = usePathname();
+	const path = pathName.slice(4);
+	return (
+		<footer className="bg-main-yellow pt-4 md:pt-6 ">
+			<div className="layout">
+				<div className=" lg:flex lg:justify-between pb-6 relative">
+					<div className="">
+						<div className="mb-4 md:mb-6">
+							<Logo lang={lang} setIsOpen={setIsOpen} />
+						</div>
+						{/* <Link
               href="https://www.linkedin.com/company/junfolio/mycompany/"
               className="absolute bottom-[80px] right-[10px] md:top-0 md:right-0 lg:top-52 lg:left-0"
               target="_blank"
@@ -34,8 +34,8 @@ export const Footer: FC<TextHeaderProps> = ({ textTr, lang }) => {
                 className="md:w-12 md:h-12"
               />
             </Link> */}
-          </div>
-          {/* <div className="flex items-center md:justify-between">
+					</div>
+					{/* <div className="flex items-center md:justify-between">
             <ul className="mr-11 lg:mr-72">
               <li className="text-xs  md:text-2xl mb-4 md:mb-5 md:p-2">
                 <Link href={`/${lang}`}>{textTr.footerMain}</Link>
@@ -67,8 +67,8 @@ export const Footer: FC<TextHeaderProps> = ({ textTr, lang }) => {
               </li>
             </ul>
           </div> */}
-        </div>
-        {/* <div className="border-t border-dark-grey py-3 md:py-4 flex justify-between items-center ">
+				</div>
+				{/* <div className="border-t border-dark-grey py-3 md:py-4 flex justify-between items-center ">
           <p className="text-dark-grey text-xs md:text-2xl ">
             {textTr.footerRights}
           </p>
@@ -94,8 +94,8 @@ export const Footer: FC<TextHeaderProps> = ({ textTr, lang }) => {
               <Image src={iconUk} alt="uk" width={27} height={21} />
             </Link>
           </div> */}
-        {/* </div> */}
-      </div>
-    </div>
-  );
+				{/* </div> */}
+			</div>
+		</footer>
+	);
 };
