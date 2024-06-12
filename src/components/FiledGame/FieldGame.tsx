@@ -9,7 +9,6 @@ import iconFigures from "../../../public/icons/icon-figures.svg";
 import iconBg from "../../../public/icons/icon-background.svg";
 import iconBack from "../../../public/icons/icon-back.svg";
 import iconFwd from "../../../public/icons/icon-fwd.svg";
-import iconFile from "../../../public/icons/icon-file.svg";
 import ShapesModal from "../FigurePicker/Modal";
 import { DrawingBoard } from "../FigurePicker/FigurePicker";
 import { Canvas } from "../Canva/Canva";
@@ -19,6 +18,7 @@ import io, { Socket } from "socket.io-client";
 
 import TeamHistory from "../TeamHistory/TeamHistory";
 import BtnToOpenTheTeamHistory from "../utils/BtnOfTeamHistory/BtnToOpenTheTeamHistory";
+import ActiveHand from "../ActiveHand/ActiveHand";
 
 export const FieldGame = () => {
 	const [isOpenColor, setIsOpenColor] = useState(false);
@@ -30,9 +30,10 @@ export const FieldGame = () => {
 	const [socket, setSocket] = useState<Socket | undefined>(undefined);
 	const [timerRunning, setTimerRunning] = useState(false);
 	const [isOpenTeamHistory, setIsOpenTeamHistory] = useState<boolean>(false);
+	const [isPressed, setIsPressed] = useState<boolean>(false);
 
 	useEffect(() => {
-		const s = io("http://localhost:5000");
+		const s = io("http://localhost:5001");
 		setSocket(s);
 
 		return () => {
@@ -138,6 +139,11 @@ export const FieldGame = () => {
 		setSelectedShape(shape);
 	};
 
+	const isEmptyInputForUrl = ({
+		currentTarget: { value },
+	}: React.ChangeEvent<HTMLInputElement>) =>
+		value === "" && setIsPressed(false);
+
 	return (
 		<div className="layout">
 			{/* <ul className="flex items-center justify-end my-11">
@@ -241,66 +247,64 @@ export const FieldGame = () => {
 					</li>
 				</ul>
 				<div>
-					<div className=" bg-main-white flex items-center justify-between h-[66px] shadow-panel-shadow mb-2">
-						<div className="flex items-center p-4 mr-[90px]">
-							<div className=" bg-main-grey rounded-lg px-2.5 py-1 mr-5">
+					<ul className=" bg-main-white flex items-center justify-between h-[64px] shadow-panel-shadow mb-2">
+						<li className="flex gap-4 items-center px-4">
+							<button
+								type="button"
+								className="flex items-center justify-center bg-main-grey rounded-lg py-1 px-2.5"
+							>
 								<Image
 									src={iconBack}
 									alt="icon-back"
 									width="0"
 									height="0"
-									className="w-6 h-auto"
+									className="max-w-6 h-6"
 								/>
-							</div>
-							<div className=" rounded-lg px-2.5 py-1 mr-5">
+							</button>
+							<button
+								type="button"
+								className="flex items-center justify-center rounded-lg py-1 px-2.5"
+							>
 								<Image
 									src={iconFwd}
 									alt="icon-fwd"
 									width="0"
 									height="0"
-									className="w-6 h-auto"
+									className="max-w-6 h-6"
 								/>
-							</div>
-						</div>
-						<div className=" border-x border-main-grey w-[512px] px-6 h-full py-3.5 mr-[90px]">
+							</button>
+						</li>
+						<li className=" border-x border-main-grey w-full px-6 h-full py-3.5">
 							<input
 								type="text"
 								placeholder="Посилання на meet"
-								className=" text-3xl outline-none w-full"
+								className=" text-2xl outline-none w-full"
+								onChange={isEmptyInputForUrl}
 							/>
-						</div>
-						<div className="border-x border-main-grey h-full py-3.5 px-6 mr-[90px]">
+						</li>
+						<li className="h-full flex flex-col items-center justify-center px-9">
+							<ActiveHand setIsPressed={setIsPressed} isPressed={isPressed} />
+						</li>
+						<li className="flex items-center border-x border-main-grey px-8 h-full">
 							<BtnToOpenTheTeamHistory
 								setIsOpenTeamHistory={setIsOpenTeamHistory}
 								isOpenTeamHistory={isOpenTeamHistory}
-								children={
-									<Image
-										src={iconFile}
-										alt="icon-file"
-										width="0"
-										height="0"
-										className="w-11 h-auto border-none"
-									/>
-								}
 							/>
-						</div>
-						<div className="py-1.5 pr-4">
-							<div
-								className="text-5xl text-dark-grey"
-								onClick={handleTimerClick}
-							>
+						</li>
+						<li className="flex items-center justify-center px-6">
+							<p className="text-4xl text-dark-grey" onClick={handleTimerClick}>
 								{formatTime(timer)}
-							</div>
-						</div>
-					</div>
-					<div>
-						{/* <DrawingBoard
+							</p>
+						</li>
+					</ul>
+					{/* <div>
+					<DrawingBoard
               selectedColor={selectedColor}
               selectedShape={selectedShape}
               setSelectedShape={setSelectedShape}
               color={selectedColor}
-            /> */}
-					</div>
+            />
+					</div> */}
 					<ul className="flex gap-x-1 items-center">
 						<Canvas
 							color={selectedColor}

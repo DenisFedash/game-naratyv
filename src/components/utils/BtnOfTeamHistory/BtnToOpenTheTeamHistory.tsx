@@ -1,11 +1,12 @@
+import Image from "next/image";
+import iconFile from "../../../../public/icons/icon-file.svg";
+
 interface BtnToOpenTheTeamHistoryProps {
-	children: React.ReactNode;
 	setIsOpenTeamHistory: (b: boolean) => void;
 	isOpenTeamHistory: boolean;
 }
 
 const BtnToOpenTheTeamHistory: React.FC<BtnToOpenTheTeamHistoryProps> = ({
-	children,
 	setIsOpenTeamHistory,
 	isOpenTeamHistory,
 }) => {
@@ -16,8 +17,15 @@ const BtnToOpenTheTeamHistory: React.FC<BtnToOpenTheTeamHistoryProps> = ({
 		disabled:cursor-auto disabled:opacity-50 disabled:hover:scale-100 disabled:focus:scale-100"
 			onClick={openTheTeamHistory}
 			disabled={isOpenTeamHistory}
+			type="button"
 		>
-			{children}
+			<Image
+				src={iconFile}
+				alt="icon-file"
+				width="0"
+				height="0"
+				className="max-w-6 border-none"
+			/>
 		</button>
 	);
 };

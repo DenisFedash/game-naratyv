@@ -43,7 +43,6 @@ let currentCanvasData;
 let currentBackgroundColor;
 let eraserMode = false;
 let timerInterval;
-let currentTeamHistory;
 
 io.on("connection", (socket) => {
 	console.log("New client connected");
@@ -78,10 +77,9 @@ io.on("connection", (socket) => {
 		io.emit("background-color", color);
 	});
 
-	socket.on("history", (teamHistory) => {
-		currentTeamHistory = teamHistory;
-		io.emit("history", currentTeamHistory);
-	});
+	socket.on("history", (teamHistory) => io.emit("history", teamHistory));
+
+	socket.on("is-pressed", (isPressed) => io.emit("is-pressed", isPressed));
 
 	// Обработчик изменения режима ластика
 	// socket.on("eraser-mode", (mode) => {

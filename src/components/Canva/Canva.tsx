@@ -22,7 +22,7 @@ export const Canvas: FC<CanvasProps> = ({
 	const [imageData, setImageData] = useState<string | null>(null);
 
 	useEffect(() => {
-		const s = io("http://localhost:5000");
+		const s = io("http://localhost:5001");
 		setSocket(s);
 
 		s.emit("get-canvas-data");

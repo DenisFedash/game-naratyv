@@ -1,5 +1,3 @@
-import Image from "next/image";
-import Cross from "../../../public/icon/cross.svg";
 import BtnToCloseTheTeamHistory from "../utils/BtnOfTeamHistory/BtnToCloseTheTeamHistory";
 import { useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
@@ -14,7 +12,7 @@ const TeamHistory: React.FC<TeamHistoryProps> = ({ setIsOpenTeamHistory }) => {
 	const [socket, setSocket] = useState<Socket | undefined>(undefined);
 
 	useEffect(() => {
-		const s = io("http://localhost:5000");
+		const s = io("http://localhost:5001");
 		setSocket(s);
 
 		const isEmpty = localStorage.getItem("history");
@@ -44,10 +42,7 @@ const TeamHistory: React.FC<TeamHistoryProps> = ({ setIsOpenTeamHistory }) => {
 		<li className="h-[520px] w-[318px] bg-main-white  border border-dark-grey p-2">
 			<div className="flex justify-between mb-4">
 				<p className="text-dark-grey text-base font-bold">Ісория команди</p>
-				<BtnToCloseTheTeamHistory
-					setIsOpenTeamHistory={setIsOpenTeamHistory}
-					children={<Image src={Cross} alt="cross" />}
-				/>
+				<BtnToCloseTheTeamHistory setIsOpenTeamHistory={setIsOpenTeamHistory} />
 			</div>
 			<textarea
 				className="w-full h-[460px] resize-none pr-6 p-1 text-sm font-normal outline-none"
