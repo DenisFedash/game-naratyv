@@ -32,7 +32,7 @@ export const FieldGame = () => {
 	const [isOpenTeamHistory, setIsOpenTeamHistory] = useState<boolean>(false);
 
 	useEffect(() => {
-		const s = io("http://localhost:5001");
+		const s = io("http://localhost:5000");
 		setSocket(s);
 
 		return () => {
