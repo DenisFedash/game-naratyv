@@ -2,7 +2,7 @@ import Image from "next/image";
 import iconHandGrey from "../../../public/icon/icon-hand-grey.svg";
 import iconHandOrange from "../../../public/icon/icon-hand-orange.svg";
 import { useEffect, useState } from "react";
-import { Socket, io } from "socket.io-client";
+import io, { Socket } from "socket.io-client";
 
 const someArr: any[] = [
 	{ name: "asdf", id: 1 },
@@ -20,13 +20,12 @@ const ActiveHand: React.FC<ActiveHandProps> = ({ setIsPressed, isPressed }) => {
 	const [socket, setSocket] = useState<Socket | undefined>(undefined);
 
 	useEffect(() => {
-		const s = io("http://localhost:5001");
+		const s = io("http://localhost:5000");
 		setSocket(s);
 
 		const id = someArr.find((p) => p.id === 3);
 
 		setPlayer(id.name);
-		console.log(id);
 
 		return () => {
 			s.disconnect();
@@ -42,9 +41,8 @@ const ActiveHand: React.FC<ActiveHandProps> = ({ setIsPressed, isPressed }) => {
 		}
 	}, [isPressed]);
 
-	const handlerClick = () => {
-		setIsPressed(true);
-	};
+	const handlerClick = () => setIsPressed(true);
+
 	return (
 		<>
 			{isPressed && (
@@ -64,7 +62,7 @@ const ActiveHand: React.FC<ActiveHandProps> = ({ setIsPressed, isPressed }) => {
 					alt="icon-hand"
 					height="0"
 					width="0"
-					className={`max-w-6 ${isPressed && "text-orange"}`}
+					className="max-w-6"
 				/>
 			</button>
 		</>

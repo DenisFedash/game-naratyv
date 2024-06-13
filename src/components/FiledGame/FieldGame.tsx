@@ -33,7 +33,7 @@ export const FieldGame = () => {
 	const [isPressed, setIsPressed] = useState<boolean>(false);
 
 	useEffect(() => {
-		const s = io("http://localhost:5001");
+		const s = io("http://localhost:5000");
 		setSocket(s);
 
 		return () => {
