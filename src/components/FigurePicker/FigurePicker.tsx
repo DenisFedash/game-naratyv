@@ -29,7 +29,8 @@ export const DrawingBoard: FC<DrawingBoardProps> = ({
   const [isDrawing, setIsDrawing] = useState(false);
 
   useEffect(() => {
-    const s = io("http://localhost:5000");
+    // const s = io("https://dg29hbl9-5556.euw.devtunnels.ms/");
+    const s = io("http://localhost:5556")
     setSocket(s);
 
     return () => {

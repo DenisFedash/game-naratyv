@@ -1,5 +1,7 @@
 'use client'
 import React, { useEffect, useRef } from 'react'
+import Link from 'next/link'
+
 type Props = {}
 
 const GameStartRulesPopup: React.FC<Props> = () => {
@@ -31,11 +33,11 @@ const GameStartRulesPopup: React.FC<Props> = () => {
         <ol className='w-[690px] mx-auto flex justify-start flex-col gap-2 text-xl'>
           <li className='list-decimal list-inside text-start'>
 						Створіть&nbsp;
-            <a href='https://meet.google.com/' target='_blank' className='text-main-yellow hover:text-orange'>
+            <Link href='https://meet.google.com/' target='_blank' className='text-main-yellow hover:text-orange'>
               Google Meet
-            </a>
+            </Link>
             &nbsp;та вcтавте посилання у відповідне вікно на вверхній панелі поля гри
-					</li>
+          </li>
 
           <li className='list-decimal list-inside text-start'>
 						Назвіть свою команду

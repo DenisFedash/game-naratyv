@@ -8,3 +8,42 @@ import data from "../../../../../public/data/dataGallery.json";
  export const getPictureById = async (id: string) => {
      return data.find((picture) => picture.id === id);
  }
+
+
+ export const postGallery = async (
+    topic, 
+    text,
+    photo_jpeg: Blob, 
+    team_name
+   ) => {
+    const game_uuid = "af2ea118-abd1-434d-848c-dd578979c5b9";
+    try {
+      const formData = new FormData();
+      
+      formData.append("topic", topic);
+      formData.append("text", text);
+      formData.append("photo_jpeg", photo_jpeg, 'image.jpeg'); 
+      formData.append("team_name", team_name);
+      formData.append("game_uuid", game_uuid);
+
+      const response = await fetch( `https://api-backend.naratyv-creative.fun/api/v1/gallery/${game_uuid}`, {
+        method: "POST",
+        body: formData
+      });
+      
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      
+      const responseData = await response.json();
+      console.log("Received response:", responseData);   
+      const data = responseData.data;
+      console.log("data:", data);
+      return data;
+    } catch (error) {
+      console.error("Error:", error);
+    }
+};
+
+
+
